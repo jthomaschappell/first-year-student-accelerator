@@ -162,7 +162,7 @@ def main():
     }
     
     # Write to JSON file
-    output_file = 'calendar.json'
+    output_file = 'schedule.json'
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
     
