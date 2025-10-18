@@ -1,14 +1,81 @@
 {
   "generated_at": "2025-10-17T19:30:04.031713",
   "total_events": 379,
-  "courses": [
-    "MATH 320",
-    "MATH 321",
-    "MATH 344",
-    "MATH 345",
-    "CS 580",
-    "CS 452"
-  ],
+  "courses": {
+    "MATH 320": {
+      "schedule": [
+        {
+          "days": ["M", "W", "F"],
+          "start_time": "9:00",
+          "end_time": "9:50",
+          "building": "TMCB",
+          "room": "104"
+        }
+      ]
+    },
+    "MATH 321": {
+      "schedule": [
+        {
+          "days": ["Th"],
+          "start_time": "9:00",
+          "end_time": "10:50",
+          "building": "TMCB",
+          "room": "150"
+        }
+      ]
+    },
+    "MATH 344": {
+      "schedule": [
+        {
+          "days": ["M", "W", "F"],
+          "start_time": "10:00",
+          "end_time": "10:50",
+          "building": "TMCB",
+          "room": "104"
+        }
+      ]
+    },
+    "MATH 345": {
+      "schedule": [
+        {
+          "days": ["T"],
+          "start_time": "9:00",
+          "end_time": "10:50",
+          "building": "TMCB",
+          "room": "150"
+        }
+      ]
+    },
+    "CS 580": {
+      "schedule": [
+        {
+          "days": ["T", "Th"],
+          "start_time": "14:00",
+          "end_time": "15:15",
+          "building": "MARB",
+          "room": "130"
+        },
+        {
+          "days": ["F"],
+          "start_time": "14:00",
+          "end_time": "15:15",
+          "building": "ESC",
+          "room": "C295"
+        }
+      ]
+    },
+    "CS 452": {
+      "schedule": [
+        {
+          "days": ["M", "W"],
+          "start_time": "14:00",
+          "end_time": "15:15",
+          "building": "MARB",
+          "room": "B150"
+        }
+      ]
+    }
+  },
   "events": [
     {
       "assignment": "Quiz: Intro to Python",
