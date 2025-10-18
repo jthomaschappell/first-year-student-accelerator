@@ -88,51 +88,96 @@ export function AIAdvisorPanel() {
   }, [messages]);
 
   const parseMessageContent = (content: string) => {
-    // First check if this is a pre-formatted event artifact
-    if (content.includes('<div class="event-artifact"')) {
-      const eventArtifacts = [];
+    // Check for both event and professor artifacts
+    const hasEventArtifact = content.includes('<div class="event-artifact"');
+    const hasProfessorArtifact = content.includes('<div class="professor-artifact"');
+    
+    if (hasEventArtifact || hasProfessorArtifact) {
+      const eventArtifacts: Array<{ placeholder: string; html: string }> = [];
       let processedContent = content;
-      
-      // More robust regex that matches complete event-artifact divs with all nested content
-      // This matches the opening tag and finds the matching closing tag by counting div depth
       const matches: string[] = [];
-      let startPos = 0;
       
-      while (true) {
-        const startIndex = processedContent.indexOf('<div class="event-artifact"', startPos);
-        if (startIndex === -1) break;
-        
-        // Find matching closing tag by counting div depth
-        let depth = 0;
-        let i = startIndex;
-        let endIndex = -1;
-        
-        while (i < processedContent.length) {
-          if (processedContent.substring(i, i + 4) === '<div') {
-            depth++;
-            i += 4;
-          } else if (processedContent.substring(i, i + 6) === '</div>') {
-            depth--;
-            if (depth === 0) {
-              endIndex = i + 6;
-              break;
+      // Extract event artifacts
+      if (hasEventArtifact) {
+        let startPos = 0;
+        while (true) {
+          const startIndex = processedContent.indexOf('<div class="event-artifact"', startPos);
+          if (startIndex === -1) break;
+          
+          // Find matching closing tag by counting div depth
+          let depth = 0;
+          let i = startIndex;
+          let endIndex = -1;
+          
+          while (i < processedContent.length) {
+            if (processedContent.substring(i, i + 4) === '<div') {
+              depth++;
+              i += 4;
+            } else if (processedContent.substring(i, i + 6) === '</div>') {
+              depth--;
+              if (depth === 0) {
+                endIndex = i + 6;
+                break;
+              }
+              i += 6;
+            } else {
+              i++;
             }
-            i += 6;
+          }
+          
+          if (endIndex !== -1) {
+            const artifactHtml = processedContent.substring(startIndex, endIndex);
+            matches.push(artifactHtml);
+            eventArtifacts.push({
+              placeholder: `__EVENT_${eventArtifacts.length}__`,
+              html: artifactHtml
+            });
+            startPos = endIndex;
           } else {
-            i++;
+            break;
           }
         }
-        
-        if (endIndex !== -1) {
-          const artifactHtml = processedContent.substring(startIndex, endIndex);
-          matches.push(artifactHtml);
-          eventArtifacts.push({
-            placeholder: `__EVENT_${eventArtifacts.length}__`,
-            html: artifactHtml
-          });
-          startPos = endIndex;
-        } else {
-          break;
+      }
+      
+      // Extract professor artifacts
+      if (hasProfessorArtifact) {
+        let startPos = 0;
+        while (true) {
+          const startIndex = processedContent.indexOf('<div class="professor-artifact"', startPos);
+          if (startIndex === -1) break;
+          
+          // Find matching closing tag by counting div depth
+          let depth = 0;
+          let i = startIndex;
+          let endIndex = -1;
+          
+          while (i < processedContent.length) {
+            if (processedContent.substring(i, i + 4) === '<div') {
+              depth++;
+              i += 4;
+            } else if (processedContent.substring(i, i + 6) === '</div>') {
+              depth--;
+              if (depth === 0) {
+                endIndex = i + 6;
+                break;
+              }
+              i += 6;
+            } else {
+              i++;
+            }
+          }
+          
+          if (endIndex !== -1) {
+            const artifactHtml = processedContent.substring(startIndex, endIndex);
+            matches.push(artifactHtml);
+            eventArtifacts.push({
+              placeholder: `__PROFESSOR_${eventArtifacts.length}__`,
+              html: artifactHtml
+            });
+            startPos = endIndex;
+          } else {
+            break;
+          }
         }
       }
       
@@ -214,8 +259,28 @@ export function AIAdvisorPanel() {
               }
               
               let textContent = part;
-              textContent = textContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+              
+              // Process markdown
+              // Headers (###, ##, #)
+              textContent = textContent.replace(/^### (.*?)$/gm, '<h3 style="font-size: 1.125rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: #93C5FD;">$1</h3>');
+              textContent = textContent.replace(/^## (.*?)$/gm, '<h2 style="font-size: 1.25rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: #93C5FD;">$1</h2>');
+              textContent = textContent.replace(/^# (.*?)$/gm, '<h1 style="font-size: 1.5rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: #93C5FD;">$1</h1>');
+              
+              // Bold
+              textContent = textContent.replace(/\*\*(.*?)\*\*/g, '<strong style="font-weight: 600; color: #E5E7EB;">$1</strong>');
+              
+              // Italic
+              textContent = textContent.replace(/\*(.*?)\*/g, '<em>$1</em>');
+              
+              // Links
               textContent = textContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">$1</a>');
+              
+              // Lists (simple implementation)
+              textContent = textContent.replace(/^- (.*?)$/gm, '<div style="margin-left: 1rem;">• $1</div>');
+              textContent = textContent.replace(/^\* (.*?)$/gm, '<div style="margin-left: 1rem;">• $1</div>');
+              
+              // Horizontal rules
+              textContent = textContent.replace(/^---$/gm, '<hr style="border-top: 1px solid #4B5563; margin: 1rem 0;" />');
               
               return <span key={partIdx} dangerouslySetInnerHTML={{ __html: textContent }} />;
             })}
@@ -368,10 +433,10 @@ export function AIAdvisorPanel() {
           size="sm"
           className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
           onClick={() => {
-            setInput("Tell me about my professors");
+            setInput("Tell me about professor ratings");
           }}
         >
-          About my professors
+          Professor ratings
         </Button>
         <Button
           variant="outline"

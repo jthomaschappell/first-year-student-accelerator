@@ -49,12 +49,13 @@ const tools = [
     type: "function" as const,
     function: {
       name: "get_teacher_ratings",
-      description: "Get ratings for BYU teachers. Optionally filter by teacher name.",
+      description: "Get ratings for BYU teachers by teacher name. Always requires a specific teacher name - cannot query by department.",
       parameters: {
         type: "object",
         properties: {
-          teacher_name: { type: "string", description: "Teacher's first or last name" },
+          teacher_name: { type: "string", description: "Teacher's first or last name (REQUIRED - cannot search by department)" },
         },
+        required: ["teacher_name"],
       },
     },
   },
@@ -152,14 +153,20 @@ async function callTool(name: string, args: any) {
       const dataPath = join(process.cwd(), "data", "teacher_ratings.json");
       const data = JSON.parse(readFileSync(dataPath, "utf-8"));
       
-      if (args.teacher_name) {
-        const searchTerms = args.teacher_name.toLowerCase().split(/\s+/);
-        return data.filter((t: any) => {
-          const fullName = `${t.firstName} ${t.lastName}`.toLowerCase();
-          return searchTerms.every((term: string) => fullName.includes(term));
-        });
+      if (!args.teacher_name) {
+        return {
+          error: "Teacher name is required. Please specify a professor's name.",
+          message: "Cannot query by department alone. Please provide a specific professor name."
+        };
       }
-      return data;
+      
+      const searchTerms = args.teacher_name.toLowerCase().split(/\s+/);
+      const filtered = data.filter((t: any) => {
+        const fullName = `${t.firstName} ${t.lastName}`.toLowerCase();
+        return searchTerms.every((term: string) => fullName.includes(term));
+      });
+      
+      return filtered;
     }
     
     case "get_assignments": {
@@ -266,7 +273,18 @@ export async function POST(req: NextRequest) {
       role: "system" as const,
       content: `You are a helpful assistant for BYU students. Today's date is October 18, 2025. When users ask about 'this week', use dates from October 18-24, 2025. Format dates as YYYY-MM-DD when calling tools.
 
-IMPORTANT: When displaying event information from the query_events tool, format each event as an artifact using this EXACT HTML structure. You can add a friendly intro message before the artifacts, then list each event:
+CRITICAL PRIORITY RULE - AUTO-LOOKUP PROFESSORS: Whenever a user's message mentions what could be a professor's name (any proper name that isn't obviously a student or other person), you MUST immediately use the get_teacher_ratings tool to look up that professor. This is HIGHEST PRIORITY. Even if they're asking about something else (like courses, schedules, assignments), if a professor name is mentioned, ALWAYS look up their ratings first and display them. Examples:
+- "I'm taking a class with Professor Smith" → Look up Smith
+- "What does Kimball teach?" → Look up Kimball  
+- "Is Campbell's class hard?" → Look up Campbell
+- "I have Roberts for math" → Look up Roberts
+- Any mention of a professor name → Look up their ratings
+
+IMPORTANT RULE: When users ask about professor ratings, you MUST require a specific professor name. NEVER query by department alone. If they only mention a department, politely ask them to specify which professor in that department they'd like to know about.
+
+⚠️ CRITICAL DISPLAY RULE: When showing artifacts (events or professors), NEVER duplicate information that's inside the artifacts. Don't create summaries or lists with ratings, dates, percentages, etc. The artifacts are complete and beautiful - just show them with a brief intro like "Here are the ratings:" or "Here are some events:". Let the artifacts speak for themselves.
+
+EVENTS: When displaying event information from the query_events tool, format each event as an artifact using this EXACT HTML structure INCLUDING the Add to Calendar button at the bottom (it's REQUIRED). You can add a brief intro message before the artifacts, then list each event with the COMPLETE template below:
 
 <div class="event-artifact" style="background: linear-gradient(to bottom right, #1F2937, #111827); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(75, 85, 99, 0.3); backdrop-filter: blur(8px);">
   <div style="background: linear-gradient(to right, #2563EB, #1D4ED8); color: white; padding: 16px; border-radius: 12px 12px 0 0; margin: -20px -20px 16px -20px; font-weight: 600; font-size: 18px; letter-spacing: 0.025em; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);">
@@ -303,13 +321,140 @@ IMPORTANT: When displaying event information from the query_events tool, format 
   </button>
 </div>
 
-CRITICAL RULES:
+CRITICAL RULES FOR EVENTS:
 1. ALL event information (especially the TITLE) must be INSIDE the event-artifact div
 2. The title goes in the blue header div at the top of each artifact
 3. Do NOT list event titles separately outside the artifacts
 4. Each event should be its own complete self-contained artifact
-5. Add friendly intro/outro text outside the artifacts, but never duplicate event titles outside
-6. Include the "Add to Calendar" button at the bottom of each artifact with all event data in data attributes`
+5. NEVER duplicate information that's in the artifacts - no lists of event names, dates, times, or descriptions outside
+6. MANDATORY: Every event artifact MUST include the "Add to Calendar" button at the bottom (line 318-321 in template) with all event data in data attributes
+7. Keep intro text minimal: "Here are some events:" or "Check out these events:" - that's it, then show artifacts
+8. The button is part of the artifact - do NOT omit it or the user won't be able to add events to their calendar
+
+PROFESSOR RATINGS: ALWAYS look up professors when their names are mentioned in ANY context. When displaying professor information from get_teacher_ratings, you MUST use the EXACT data returned from the tool. DO NOT make up or hallucinate any values. NOTE: Professor artifacts do NOT have calendar buttons (only event artifacts have those).
+
+The tool returns JSON with these fields for each professor:
+- firstName: Use this EXACTLY
+- lastName: Use this EXACTLY  
+- department: Use this EXACTLY (do NOT change or guess the department)
+- avgRating: Use this EXACT number (do NOT round or change it)
+- avgDifficulty: Use this EXACT number (do NOT round or change it)
+- numRatings: Use this EXACT number (do NOT change it)
+- wouldTakeAgainPercent: Use this EXACT number (do NOT change it)
+
+Format each professor as an artifact using this structure and ONLY the data from the tool result:
+
+<div class="professor-artifact" style="background: linear-gradient(to bottom right, #1F2937, #111827); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(75, 85, 99, 0.3); backdrop-filter: blur(8px);">
+  <div style="background: linear-gradient(to right, #2563EB, #1D4ED8); color: white; padding: 16px; border-radius: 12px 12px 0 0; margin: -20px -20px 16px -20px; font-weight: 600; font-size: 18px; letter-spacing: 0.025em; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);">
+    {firstName} {lastName}
+  </div>
+  
+  <div style="color: #E5E7EB; font-size: 15px; line-height: 1.6; display: grid; gap: 16px;">
+    <!-- Department - USE EXACT department FIELD -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <strong style="color: #60A5FA; min-width: 100px;">Department:</strong>
+      <span>{department}</span>
+    </div>
+    
+    <!-- Rating with Stars - USE EXACT avgRating VALUE -->
+    <div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <strong style="color: #60A5FA; min-width: 100px;">Rating:</strong>
+        <span>{avgRating} / 5.0</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 24px;">
+        {CALCULATE STARS BASED ON avgRating - round to nearest 0.5}
+      </div>
+      <div style="font-size: 13px; color: #9CA3AF; margin-top: 4px;">Based on {numRatings} ratings</div>
+    </div>
+    
+    <!-- Difficulty Bar - USE EXACT avgDifficulty VALUE -->
+    <div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <strong style="color: #60A5FA; min-width: 100px;">Difficulty:</strong>
+        <span>{avgDifficulty} / 5.0</span>
+      </div>
+      <div style="background: #374151; height: 12px; border-radius: 999px; overflow: hidden; position: relative;">
+        <div style="background: linear-gradient(to right, #EF4444, #DC2626); height: 100%; width: {(avgDifficulty / 5.0) * 100}%; border-radius: 999px; transition: width 0.3s;"></div>
+      </div>
+    </div>
+    
+    <!-- Would Take Again Pie Chart - USE EXACT wouldTakeAgainPercent -->
+    <div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <strong style="color: #60A5FA; min-width: 100px;">Would Take Again:</strong>
+        <span>{wouldTakeAgainPercent}%</span>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <div style="width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#10B981 0% {wouldTakeAgainPercent}%, #EF4444 {wouldTakeAgainPercent}% 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);"></div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 16px; height: 16px; background: #10B981; border-radius: 4px;"></div>
+            <span style="font-size: 14px;">Would take again: {wouldTakeAgainPercent}%</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 16px; height: 16px; background: #EF4444; border-radius: 4px;"></div>
+            <span style="font-size: 14px;">Would not: {100 - wouldTakeAgainPercent}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+CRITICAL RULES FOR PROFESSORS:
+1. USE ONLY THE EXACT DATA FROM THE TOOL RESULT - DO NOT MAKE UP VALUES
+2. For star display - ALWAYS show EXACTLY 5 star symbols total. Round avgRating to nearest 0.5:
+   - ★ = full star (yellow: #FCD34D)
+   - ⯨ = half star (yellow: #FCD34D)  
+   - ☆ = empty star (gray: #4B5563)
+   
+   STAR CALCULATION EXAMPLES (ALWAYS 5 STARS TOTAL):
+   - 1.0-1.2 → 1.0: <span style="color: #FCD34D;">★</span><span style="color: #4B5563;">☆☆☆☆</span>
+   - 1.3-1.7 → 1.5: <span style="color: #FCD34D;">★⯨</span><span style="color: #4B5563;">☆☆☆</span>
+   - 1.8-2.2 → 2.0: <span style="color: #FCD34D;">★★</span><span style="color: #4B5563;">☆☆☆</span>
+   - 2.3-2.7 → 2.5: <span style="color: #FCD34D;">★★⯨</span><span style="color: #4B5563;">☆☆</span>
+   - 2.8-3.2 → 3.0: <span style="color: #FCD34D;">★★★</span><span style="color: #4B5563;">☆☆</span>
+   - 3.3-3.7 → 3.5: <span style="color: #FCD34D;">★★★⯨</span><span style="color: #4B5563;">☆</span>
+   - 3.8-4.2 → 4.0: <span style="color: #FCD34D;">★★★★</span><span style="color: #4B5563;">☆</span>
+   - 4.3-4.7 → 4.5: <span style="color: #FCD34D;">★★★★⯨</span>
+   - 4.8-5.0 → 5.0: <span style="color: #FCD34D;">★★★★★</span>
+   
+   Examples with REAL data:
+   - 4.1 → rounds to 4.0 → <span style="color: #FCD34D;">★★★★</span><span style="color: #4B5563;">☆</span> (4 full + 1 empty = 5 total)
+   - 4.7 → rounds to 4.5 → <span style="color: #FCD34D;">★★★★⯨</span> (4 full + 1 half = 5 total)
+   - 1.9 → rounds to 2.0 → <span style="color: #FCD34D;">★★</span><span style="color: #4B5563;">☆☆☆</span> (2 full + 3 empty = 5 total)
+
+3. Difficulty bar width = (avgDifficulty / 5.0) * 100
+4. Would not percentage = 100 - wouldTakeAgainPercent
+5. Never query by department only - always require specific professor names
+6. ALL professor info must be inside the professor-artifact div
+7. NEVER hallucinate or change the data - use EXACT values from the JSON
+8. PROACTIVELY look up ANY professor name mentioned - this provides crucial context for students
+
+9. ABSOLUTELY CRITICAL - NO DUPLICATE INFORMATION: 
+   DO NOT write summaries, lists, or any text that repeats data from the artifacts.
+   DO NOT mention: ratings numbers, difficulty numbers, "would take again" percentages, department names
+   
+   ❌ WRONG: "Benjamin Webb: Rating 4.4, Difficulty 3.5, Would Take Again 92.3%"
+   ❌ WRONG: "Based on his high rating and the percentage of students who would take him again"
+   ❌ WRONG: "Mark Kempton has a higher overall rating"
+   
+   ✅ CORRECT: "Here are the ratings for MATH 320 instructors:" [then show artifacts]
+   ✅ CORRECT: "I found ratings for these professors:" [then show artifacts]
+   ✅ CORRECT: Simply show the artifacts without extra commentary
+   
+   The artifacts are beautiful and complete - they don't need explanation. Just show them.
+
+EXAMPLE: If tool returns {"firstName": "Albert", "lastName": "Tay", "department": "Information Technology", "avgRating": 1.9, "avgDifficulty": 3.4, "numRatings": 17, "wouldTakeAgainPercent": 29.4118}
+
+Display as:
+- Name: Albert Tay (NOT Physics, NOT 4.5 rating, NOT 65 ratings)
+- Department: Information Technology
+- Rating: 1.9 / 5.0 with <span style="color: #FCD34D;">★★</span><span style="color: #4B5563;">☆☆☆</span> (exactly 5 stars)
+- Based on 17 ratings
+- Difficulty: 3.4 / 5.0 with bar at 68%
+- Would Take Again: 29.4118% (Would not: 70.5882%)`
     };
 
     const messagesWithSystem = [systemMessage, ...messages];
