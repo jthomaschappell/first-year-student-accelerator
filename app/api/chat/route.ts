@@ -156,7 +156,7 @@ async function callTool(name: string, args: any) {
         const searchTerms = args.teacher_name.toLowerCase().split(/\s+/);
         return data.filter((t: any) => {
           const fullName = `${t.firstName} ${t.lastName}`.toLowerCase();
-          return searchTerms.every(term => fullName.includes(term));
+          return searchTerms.every((term: string) => fullName.includes(term));
         });
       }
       return data;
@@ -215,7 +215,7 @@ async function callTool(name: string, args: any) {
       
       try {
         // Dynamic import of Google Calendar MCP
-        const { GoogleCalendarMCP } = await import("../../calendar/src/calendarMcpClient.js");
+        const { GoogleCalendarMCP } = await import("../../../calendar/src/calendarMcpClient.js");
         
         const gcal = new GoogleCalendarMCP(
           process.env.GOOGLE_OAUTH_CREDENTIALS || process.env.GOOGLE_CALENDAR_CREDENTIALS!
@@ -314,7 +314,7 @@ export async function POST(req: NextRequest) {
     // Detect event patterns and add buttons
     const eventPattern = /\*\*(.*?)\*\*\s*-\s*\*\*Time:\*\*\s*([\d:APM\s]+)/g;
     let match;
-    const events = [];
+    const events: { name: string; time: string }[] = [];
     
     while ((match = eventPattern.exec(processedContent)) !== null) {
       const eventName = match[1];
