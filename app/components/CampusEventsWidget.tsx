@@ -2,9 +2,35 @@ import { Card } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
 import { ScrollArea } from '@/app/components/ui/scroll-area';
 import { MapPin, Calendar, Clock } from 'lucide-react';
-import { campusEventsData } from '@/app/data/mockCampusEvents';
+import { useState, useEffect } from 'react';
+
+interface BYUEvent {
+  EventId: string;
+  Title: string;
+  StartDateTime: string;
+  EndDateTime: string;
+  LocationName: string;
+  Description: string;
+  CategoryName: string;
+}
+
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  location: string;
+  category: string;
+  description: string;
+  tags: string[];
+}
 
 export function CampusEventsWidget() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const getCategoryColor = (category: string) => {
     switch (category) {
       case 'career': return 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300';
@@ -16,9 +42,95 @@ export function CampusEventsWidget() {
     }
   };
 
+  const mapCategory = (categoryName: string): string => {
+    const lower = categoryName.toLowerCase();
+    if (lower.includes('career') || lower.includes('job') || lower.includes('employment')) return 'career';
+    if (lower.includes('academic') || lower.includes('education') || lower.includes('study')) return 'academic';
+    if (lower.includes('social') || lower.includes('community') || lower.includes('networking')) return 'social';
+    if (lower.includes('wellness') || lower.includes('health') || lower.includes('mental')) return 'wellness';
+    if (lower.includes('sport') || lower.includes('athletic') || lower.includes('fitness')) return 'sports';
+    return 'other';
+  };
+
+  const mapBYUEventToEvent = (byuEvent: BYUEvent): Event => {
+    const startDateTime = new Date(byuEvent.StartDateTime);
+    const dateStr = startDateTime.toISOString().split('T')[0];
+    
+    // Extract time from StartDateTime (format: MM-dd-yyyy HH:mm:ss)
+    const startTime = startDateTime.toTimeString().split(' ')[0].substring(0, 5);
+    
+    // Extract time from EndDateTime
+    const endDateTime = new Date(byuEvent.EndDateTime);
+    const endTime = endDateTime.toTimeString().split(' ')[0].substring(0, 5);
+    
+    return {
+      id: byuEvent.EventId,
+      title: byuEvent.Title,
+      date: dateStr,
+      startTime: startTime,
+      endTime: endTime,
+      location: byuEvent.LocationName || 'TBA',
+      category: mapCategory(byuEvent.CategoryName),
+      description: byuEvent.Description || '',
+      tags: [byuEvent.CategoryName.toLowerCase()]
+    };
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        
+        const today = new Date();
+        const twoWeeksFromNow = new Date();
+        twoWeeksFromNow.setDate(today.getDate() + 14);
+        
+        const startDate = today.toISOString().split('T')[0];
+        const endDate = twoWeeksFromNow.toISOString().split('T')[0];
+        
+        const url = new URL('https://calendar.byu.edu/api/Events.json');
+        url.searchParams.set('categories', 'all');
+        url.searchParams.set('event[min][date]', startDate);
+        url.searchParams.set('event[max][date]', endDate);
+        
+        const response = await fetch(url.toString());
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch events: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('BYU API Response:', data);
+        
+        // Handle BYU API response structure - it returns {result: {item: [...]}}
+        let eventsArray = [];
+        if (data.result && data.result.item) {
+          // Handle single item vs array of items
+          eventsArray = Array.isArray(data.result.item) ? data.result.item : [data.result.item];
+        } else if (Array.isArray(data)) {
+          eventsArray = data;
+        } else if (data.events) {
+          eventsArray = data.events;
+        }
+        
+        const mappedEvents = eventsArray.map(mapBYUEventToEvent);
+        setEvents(mappedEvents);
+      } catch (err) {
+        console.error('Error fetching campus events:', err);
+        setError('Failed to load campus events');
+        setEvents([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    const today = new Date(2025, 0, 20); // Mock current date
+    const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
@@ -37,7 +149,7 @@ export function CampusEventsWidget() {
     return `${displayHour}:${minutes} ${ampm}`;
   };
 
-  const sortedEvents = [...campusEventsData].sort((a, b) => 
+  const sortedEvents = [...events].sort((a, b) => 
     new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
@@ -46,7 +158,20 @@ export function CampusEventsWidget() {
       <h4 className="mb-4 text-white">Campus Events</h4>
       <ScrollArea className="flex-1">
         <div className="space-y-3 pr-4">
-          {sortedEvents.map(event => (
+          {isLoading ? (
+            <div className="text-center text-slate-400 py-8">
+              <div className="animate-pulse">Loading campus events...</div>
+            </div>
+          ) : error ? (
+            <div className="text-center text-red-400 py-8">
+              <div>{error}</div>
+            </div>
+          ) : sortedEvents.length === 0 ? (
+            <div className="text-center text-slate-400 py-8">
+              <div>No upcoming events found</div>
+            </div>
+          ) : (
+            sortedEvents.map(event => (
             <Card key={event.id} className="p-3 bg-slate-800/80 hover:bg-slate-800 backdrop-blur-sm transition-all cursor-pointer border-slate-700/50 shadow-sm hover:shadow-md">
               <div className="flex items-start justify-between gap-2 mb-2">
                 <h4 className="text-sm flex-1 text-slate-100">{event.title}</h4>
@@ -82,7 +207,8 @@ export function CampusEventsWidget() {
                 ))}
               </div>
             </Card>
-          ))}
+            ))
+          )}
         </div>
       </ScrollArea>
     </Card>
