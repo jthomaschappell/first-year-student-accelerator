@@ -120,11 +120,11 @@ async function callTool(name: string, args: any) {
       const data = JSON.parse(readFileSync(dataPath, "utf-8"));
       
       if (args.teacher_name) {
-        const search = args.teacher_name.toLowerCase();
-        return data.filter((t: any) => 
-          t.firstName.toLowerCase().includes(search) || 
-          t.lastName.toLowerCase().includes(search)
-        );
+        const searchTerms = args.teacher_name.toLowerCase().split(/\s+/);
+        return data.filter((t: any) => {
+          const fullName = `${t.firstName} ${t.lastName}`.toLowerCase();
+          return searchTerms.every(term => fullName.includes(term));
+        });
       }
       return data;
     }
@@ -148,47 +148,59 @@ async function callTool(name: string, args: any) {
 }
 
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json();
+  try {
+    const { messages } = await req.json();
 
-  let response = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages,
-    tools,
-  });
+    const systemMessage = {
+      role: "system" as const,
+      content: "You are a helpful assistant for BYU students. Today's date is October 18, 2025. When users ask about 'this week', use dates from October 18-24, 2025. Format dates as YYYY-MM-DD when calling tools."
+    };
 
-  let responseMessage = response.choices[0].message;
+    const messagesWithSystem = [systemMessage, ...messages];
 
-  while (responseMessage.tool_calls) {
-    const toolCalls = responseMessage.tool_calls;
-    const toolMessages = [];
-
-    for (const toolCall of toolCalls) {
-      if (toolCall.type !== "function") continue;
-      
-      const functionName = toolCall.function.name;
-      const functionArgs = JSON.parse(toolCall.function.arguments);
-      
-      const result = await callTool(functionName, functionArgs);
-      
-      toolMessages.push({
-        role: "tool" as const,
-        tool_call_id: toolCall.id,
-        content: JSON.stringify(result),
-      });
-    }
-
-    messages.push(responseMessage);
-    messages.push(...toolMessages);
-
-    response = await openai.chat.completions.create({
+    let response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages,
+      messages: messagesWithSystem,
       tools,
     });
 
-    responseMessage = response.choices[0].message;
-  }
+    let responseMessage = response.choices[0].message;
 
-  return Response.json({ message: responseMessage });
+    while (responseMessage.tool_calls) {
+      const toolCalls = responseMessage.tool_calls;
+      const toolMessages = [];
+
+      for (const toolCall of toolCalls) {
+        if (toolCall.type !== "function") continue;
+        
+        const functionName = toolCall.function.name;
+        const functionArgs = JSON.parse(toolCall.function.arguments);
+        
+        const result = await callTool(functionName, functionArgs);
+        
+        toolMessages.push({
+          role: "tool" as const,
+          tool_call_id: toolCall.id,
+          content: JSON.stringify(result),
+        });
+      }
+
+      messagesWithSystem.push(responseMessage);
+      messagesWithSystem.push(...toolMessages);
+
+      response = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: messagesWithSystem,
+        tools,
+      });
+
+      responseMessage = response.choices[0].message;
+    }
+
+    return Response.json({ message: responseMessage });
+  } catch (error: any) {
+    console.error("Chat API error:", error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
 }
 
