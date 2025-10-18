@@ -5,25 +5,13 @@ import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import { Input } from '@/app/components/ui/input';
 import { ScrollArea } from '@/app/components/ui/scroll-area';
-import { Badge } from '@/app/components/ui/badge';
-import { Sparkles, Send, Clock, BookOpen, Calendar as CalendarIcon, Lightbulb } from 'lucide-react';
+import { Sparkles, Send } from 'lucide-react';
 
 interface AIMessage {
   id: string;
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
-  reasoning?: string[];
-  proposals?: Proposal[];
-}
-
-interface Proposal {
-  id: string;
-  type: 'study-block' | 'calendar-event' | 'focus-area';
-  title: string;
-  description: string;
-  time?: string;
-  duration?: string;
 }
 
 export function AIAdvisorPanel() {
@@ -31,127 +19,91 @@ export function AIAdvisorPanel() {
     {
       id: '1',
       role: 'assistant',
-      content: "Hi! I'm your AI study advisor. I can help you plan your day, suggest study strategies, and answer questions about your courses. What would you like to focus on today?",
-      timestamp: new Date(),
-      reasoning: [
-        "It's Monday morning, typically a good time for planning the week ahead",
-        "You have CS 101 at 9:00 AM today",
-        "Assignment 1 for CS 101 is due in 2 days"
-      ]
+      content: "Hi! I'm your BYU AI advisor. Ask me about campus events, courses, professor ratings, or your assignments!",
+      timestamp: new Date()
     }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mock AI responses based on common queries
-  const generateMockResponse = (query: string): AIMessage => {
-    const lowerQuery = query.toLowerCase();
+  const parseMessageContent = (content: string) => {
+    // First, extract and replace buttons with placeholders
+    const buttons: Array<{ placeholder: string; onClick: string; text: string }> = [];
+    let processedContent = content.replace(/<button[^>]*onclick="([^"]*)"[^>]*>(.*?)<\/button>/g, (match, onClick, buttonText) => {
+      const placeholder = `__BUTTON_${buttons.length}__`;
+      buttons.push({ placeholder, onClick, text: buttonText });
+      return placeholder;
+    });
+
+    // Extract and replace images with placeholders
+    const images: Array<{ placeholder: string; alt: string; url: string }> = [];
+    processedContent = processedContent.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
+      const placeholder = `__IMAGE_${images.length}__`;
+      images.push({ placeholder, alt, url });
+      return placeholder;
+    });
+
+    // Split by lines and process
+    const lines = processedContent.split('\n');
     
-    if (lowerQuery.includes('today') || lowerQuery.includes('focus')) {
-      return {
-        id: Date.now().toString(),
-        role: 'assistant',
-        content: "Based on your schedule and upcoming deadlines, here's what I recommend focusing on today:",
-        timestamp: new Date(),
-        reasoning: [
-          "You have CS 101 Assignment 1 due on Wednesday (in 2 days)",
-          "Your Calculus II homework is due Thursday",
-          "You have a 2-hour gap between classes from 11:00 AM to 1:00 PM today",
-          "Your CS study group meets at 4:00 PM, which is a good opportunity to review"
-        ],
-        proposals: [
-          {
-            id: 'p1',
-            type: 'study-block',
-            title: 'Work on CS Assignment 1',
-            description: 'Focus on completing the variables and loops assignment. Aim to finish at least 60% today.',
-            time: '11:00 AM',
-            duration: '90 minutes'
-          },
-          {
-            id: 'p2',
-            type: 'study-block',
-            title: 'Review Calculus concepts',
-            description: 'Go through homework problems and identify areas that need clarification for office hours tomorrow.',
-            time: '2:00 PM',
-            duration: '45 minutes'
-          },
-          {
-            id: 'p3',
-            type: 'focus-area',
-            title: 'Prepare questions for study group',
-            description: 'List any CS concepts you want to discuss during the study group session.',
-            time: '3:30 PM',
-            duration: '15 minutes'
-          }
-        ]
-      };
-    }
-    
-    if (lowerQuery.includes('professor') || lowerQuery.includes('instructor')) {
-      return {
-        id: Date.now().toString(),
-        role: 'assistant',
-        content: "I can help you understand your professors' teaching styles. Which instructor would you like to know more about?",
-        timestamp: new Date(),
-        reasoning: [
-          "Dr. Sarah Chen (CS 101) has a 4.8 rating - known for clear explanations",
-          "Prof. Michael Torres (Math 201) has a 4.5 rating but is challenging (4.1 difficulty)",
-          "Dr. Emily Rodriguez (ENG 150) is highly rated for constructive feedback"
-        ]
-      };
-    }
-    
-    if (lowerQuery.includes('math') || lowerQuery.includes('calculus')) {
-      return {
-        id: Date.now().toString(),
-        role: 'assistant',
-        content: "For your Calculus II course, I recommend:",
-        timestamp: new Date(),
-        reasoning: [
-          "Prof. Torres moves quickly through material",
-          "Homework sets are essential for exam preparation",
-          "Office hours on Tuesday at 3:00 PM are highly beneficial"
-        ],
-        proposals: [
-          {
-            id: 'p1',
-            type: 'calendar-event',
-            title: 'Attend Math Office Hours',
-            description: 'Visit Prof. Torres to clarify integration techniques before the homework is due.',
-            time: 'Tuesday, 3:00 PM',
-            duration: '30 minutes'
-          },
-          {
-            id: 'p2',
-            type: 'study-block',
-            title: 'Complete Homework Set 1',
-            description: 'Work through all problems. Flag difficult ones to discuss in office hours.',
-            time: 'Today, 6:00 PM',
-            duration: '2 hours'
-          }
-        ]
-      };
-    }
-    
-    // Default response
-    return {
-      id: Date.now().toString(),
-      role: 'assistant',
-      content: "I'm here to help! I can assist with planning your study schedule, understanding your courses, preparing for exams, and optimizing your academic routine. What specific aspect would you like help with?",
-      timestamp: new Date(),
-      reasoning: [
-        "You have 4 courses this semester with varying difficulty levels",
-        "Multiple assignments due this week",
-        "Good balance of STEM and humanities courses"
-      ]
-    };
+    return lines.map((line, lineIdx) => {
+      // Check if line contains a button or image placeholder
+      const parts = line.split(/(__BUTTON_\d+__|__IMAGE_\d+__)/g);
+      
+      return (
+        <div key={lineIdx} className="mb-2">
+          {parts.map((part, partIdx) => {
+            // Check if this part is a button placeholder
+            const button = buttons.find(b => b.placeholder === part);
+            if (button) {
+              return (
+                <Button
+                  key={partIdx}
+                  size="sm"
+                  className="ml-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-full border-2 border-blue-300 shadow-md inline-flex items-center gap-2 font-medium"
+                  onClick={() => {
+                    console.log('add to calendar');
+                  }}
+                >
+                  {button.text}
+                </Button>
+              );
+            }
+            
+            // Check if this part is an image placeholder
+            const image = images.find(img => img.placeholder === part);
+            if (image) {
+              return (
+                <div key={partIdx} className="my-3">
+                  <img 
+                    src={image.url} 
+                    alt={image.alt} 
+                    className="rounded-lg max-w-full h-auto shadow-lg"
+                    style={{ maxHeight: '300px', objectFit: 'cover' }}
+                  />
+                </div>
+              );
+            }
+            
+            // Process markdown in text
+            let textContent = part;
+            
+            // Bold text
+            textContent = textContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Links
+            textContent = textContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">$1</a>');
+            
+            return <span key={partIdx} dangerouslySetInnerHTML={{ __html: textContent }} />;
+          })}
+        </div>
+      );
+    });
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
-    // Add user message
     const userMessage: AIMessage = {
       id: Date.now().toString(),
       role: 'user',
@@ -163,24 +115,34 @@ export function AIAdvisorPanel() {
     setInput('');
     setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = generateMockResponse(input);
-      setMessages(prev => [...prev, aiResponse]);
-      setIsLoading(false);
-    }, 1000);
-  };
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          messages: messages.concat(userMessage).map(m => ({
+            role: m.role,
+            content: m.content
+          }))
+        })
+      });
 
-  const getProposalIcon = (type: Proposal['type']) => {
-    switch (type) {
-      case 'study-block':
-        return <BookOpen className="w-4 h-4" />;
-      case 'calendar-event':
-        return <CalendarIcon className="w-4 h-4" />;
-      case 'focus-area':
-        return <Lightbulb className="w-4 h-4" />;
+      const data = await response.json();
+      const aiMessage: AIMessage = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: data.message.content,
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      console.error('Chat error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
 
   return (
     <div className="flex flex-col h-full">
@@ -199,56 +161,9 @@ export function AIAdvisorPanel() {
             >
               <div className={`max-w-[85%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
                 <Card className={`p-4 ${message.role === 'user' ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg' : 'bg-slate-800/80 backdrop-blur-sm border-slate-700/50 text-slate-100'}`}>
-                  <p>{message.content}</p>
-                  
-                  {message.reasoning && message.reasoning.length > 0 && (
-                    <div className={`mt-4 pt-4 ${message.role === 'user' ? 'border-t border-white/20' : 'border-t border-slate-700/50'}`}>
-                      <div className={`flex items-center gap-2 mb-2 ${message.role === 'user' ? 'text-white/80' : 'text-slate-400'}`}>
-                        <Lightbulb className="w-4 h-4" />
-                        <span className="text-sm">Why I suggest this:</span>
-                      </div>
-                      <ul className={`space-y-1 text-sm ${message.role === 'user' ? 'text-white/70' : 'text-slate-400'}`}>
-                        {message.reasoning.map((reason, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className={message.role === 'user' ? 'text-white' : 'text-indigo-400'}>•</span>
-                            <span>{reason}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  <div className="whitespace-pre-wrap">
+                    {parseMessageContent(message.content)}
                     </div>
-                  )}
-
-                  {message.proposals && message.proposals.length > 0 && (
-                    <div className="mt-4 space-y-3">
-                      {message.proposals.map(proposal => (
-                        <Card key={proposal.id} className="p-3 bg-slate-700/50 backdrop-blur-sm border-slate-600/50">
-                          <div className="flex items-start gap-3">
-                            <div className="p-2 rounded-md bg-indigo-500/20 text-indigo-400">
-                              {getProposalIcon(proposal.type)}
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-start justify-between gap-2">
-                                <h4 className="text-sm text-slate-100">{proposal.title}</h4>
-                                <Badge variant="outline" className="text-xs border-slate-600 text-slate-300">
-                                  {proposal.type.replace('-', ' ')}
-                                </Badge>
-                              </div>
-                              <p className="text-sm text-slate-400 mt-1">{proposal.description}</p>
-                              {proposal.time && (
-                                <div className="flex items-center gap-3 mt-2 text-xs text-slate-400">
-                                  <div className="flex items-center gap-1">
-                                    <Clock className="w-3 h-3" />
-                                    {proposal.time}
-                                  </div>
-                                  {proposal.duration && <span>• {proposal.duration}</span>}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </Card>
-                      ))}
-                    </div>
-                  )}
                 </Card>
                 <div className="text-xs text-slate-500 mt-1 px-2">
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
