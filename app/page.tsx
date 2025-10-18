@@ -38,7 +38,14 @@ function UpcomingDeadlinesPanel({ maxItems = 20 }) {
             </div>
           )}
           {deadlines.map(deadline => (
-            <div key={deadline.id} className="flex items-center justify-between p-2 bg-slate-800/50 rounded-md">
+            <div 
+              key={deadline.id} 
+              className="flex items-center justify-between p-2 rounded-md border-l-4"
+              style={{
+                backgroundColor: deadline.color, // Full vibrant color to match calendar events
+                borderLeftColor: deadline.color
+              }}
+            >
               <div className="flex-1">
                 <div className="text-slate-100">{deadline.title}</div>
                 <div className="text-sm text-slate-400">
@@ -49,7 +56,14 @@ function UpcomingDeadlinesPanel({ maxItems = 20 }) {
                     })}
                 </div>
               </div>
-              <Badge variant="outline" className="border-slate-600 text-slate-300">
+              <Badge 
+                variant="outline" 
+                className="border-slate-600 text-slate-300"
+                style={{
+                  borderColor: deadline.color,
+                  color: deadline.color
+                }}
+              >
                 {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
               </Badge>
             </div>

@@ -419,7 +419,7 @@ export function AIAdvisorPanel() {
           <Button
             variant="outline"
             size="sm"
-            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            className="border-slate-600 bg-slate-800/50 text-slate-200 hover:bg-slate-700 hover:text-white hover:border-slate-500 text-xs transition-colors"
             onClick={() => setInput("What should I focus on today?")}
           >
             What should I focus on today?
@@ -427,7 +427,7 @@ export function AIAdvisorPanel() {
           <Button
             variant="outline"
             size="sm"
-            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            className="border-slate-600 bg-slate-800/50 text-slate-200 hover:bg-slate-700 hover:text-white hover:border-slate-500 text-xs transition-colors"
             onClick={() => setInput("Help me plan my study time")}
           >
             Plan my study time
@@ -435,7 +435,7 @@ export function AIAdvisorPanel() {
           <Button
             variant="outline"
             size="sm"
-            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            className="border-slate-600 bg-slate-800/50 text-slate-200 hover:bg-slate-700 hover:text-white hover:border-slate-500 text-xs transition-colors"
             onClick={() => setInput("Tell me about professor ratings")}
           >
             Professor ratings
@@ -443,7 +443,7 @@ export function AIAdvisorPanel() {
           <Button
             variant="outline"
             size="sm"
-            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            className="border-slate-600 bg-slate-800/50 text-slate-200 hover:bg-slate-700 hover:text-white hover:border-slate-500 text-xs transition-colors"
             onClick={() => setInput("What events are happening this week?")}
           >
             This week's events

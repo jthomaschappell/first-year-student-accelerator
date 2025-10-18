@@ -41,12 +41,12 @@ export interface CalendarEvent {
 
 // Course color mapping
 const courseColors: { [key: string]: string } = {
-  'MATH 320': '#4F46E5', // Indigo
-  'MATH 321': '#059669', // Green
-  'MATH 344': '#DC2626', // Red
-  'MATH 345': '#D97706', // Orange
-  'CS 580': '#7C3AED',   // Purple
-  'CS 452': '#0891B2'    // Cyan
+  'MATH 320': '#6366F1', // Bright Indigo
+  'MATH 321': '#10B981', // Bright Green
+  'MATH 344': '#EF4444', // Bright Red
+  'MATH 345': '#F59E0B', // Bright Orange
+  'CS 580': '#8B5CF6',   // Bright Purple
+  'CS 452': '#06B6D4'    // Bright Cyan
 };
 
 export function getAllCalendarEvents(): CalendarEvent[] {
