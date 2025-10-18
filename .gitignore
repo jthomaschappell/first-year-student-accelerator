@@ -1,6 +1,5 @@
 *.ics
 node_modules/
 .next/
-data/
 .env.local
 .
