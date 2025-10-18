@@ -401,7 +401,7 @@
   body {
     color: var(--foreground);
     background: linear-gradient(135deg, #002E5D 0%, #0047BA 50%, #002E5D 100%) fixed;
-    min-height: 100vh;
+    min-height: 200vh; /* Changed from 100vh to 200vh for arbitrarily large background */
   }
 
   .gradient-bg {

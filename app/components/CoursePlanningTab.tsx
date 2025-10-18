@@ -6,7 +6,7 @@ import { Card } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
 import { ScrollArea } from '@/app/components/ui/scroll-area';
-import { Search, BookOpen, Star } from 'lucide-react';
+import { Search, BookOpen, Star, Users, TrendingUp } from 'lucide-react';
 import { professorRatings } from '@/app/data/mockCourses';
 
 // Define the course type based on our API response
@@ -37,11 +37,40 @@ interface Course {
   sections: Section[];
 }
 
+// Define teacher rating interface
+interface TeacherRating {
+  id: string;
+  legacyId: number;
+  firstName: string;
+  lastName: string;
+  department: string;
+  school: string;
+  avgRating: number;
+  avgDifficulty: number;
+  numRatings: number;
+  wouldTakeAgainPercent: number;
+}
+
 export function CoursePlanningTab() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(false);
+  const [teacherRatings, setTeacherRatings] = useState<TeacherRating[]>([]);
+
+  // Load teacher ratings data on component mount
+  useEffect(() => {
+    const loadTeacherRatings = async () => {
+      try {
+        const response = await fetch('/api/teacher-ratings');
+        const data = await response.json();
+        setTeacherRatings(data);
+      } catch (error) {
+        console.error('Error loading teacher ratings:', error);
+      }
+    };
+    loadTeacherRatings();
+  }, []);
 
   // Fetch courses when search query changes
   useEffect(() => {
@@ -68,6 +97,40 @@ export function CoursePlanningTab() {
     return () => clearTimeout(debounceTimer);
   }, [searchQuery]);
 
+  // Helper function to find professor rating by name
+  const findProfessorRating = (professorName: string): TeacherRating | null => {
+    if (!professorName || !teacherRatings.length) return null;
+    
+    // Try exact match first
+    let rating = teacherRatings.find(teacher => 
+      `${teacher.firstName} ${teacher.lastName}`.trim() === professorName.trim()
+    );
+    
+    // If no exact match, try partial match
+    if (!rating) {
+      const nameParts = professorName.trim().split(' ');
+      if (nameParts.length >= 2) {
+        const firstName = nameParts[0];
+        const lastName = nameParts[nameParts.length - 1];
+        rating = teacherRatings.find(teacher => 
+          teacher.firstName.trim() === firstName && 
+          teacher.lastName.trim() === lastName
+        );
+      }
+    }
+    
+    return rating || null;
+  };
+
+  // Helper function to get unique professors from course sections
+  const getUniqueProfessors = (course: Course): string[] => {
+    const professors = course.sections
+      .map(section => section.instructorName)
+      .filter((name): name is string => name !== null && name.trim() !== '' && name !== 'TBA')
+      .filter((name, index, array) => array.indexOf(name) === index); // Remove duplicates
+    
+    return professors;
+  };
 
   const getRatingColor = (rating: number) => {
     if (rating >= 4.5) return 'text-green-600';
@@ -77,7 +140,7 @@ export function CoursePlanningTab() {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-screen">
       {/* Header - Fixed */}
       <div className="flex items-center gap-3 mb-6 flex-shrink-0">
         <BookOpen className="w-5 h-5 text-indigo-400" />
@@ -164,6 +227,76 @@ export function CoursePlanningTab() {
           <ScrollArea className="flex-1">
             {selectedCourse ? (
               <div className="space-y-4 pr-4">
+                {/* Professor Ratings Section */}
+                {getUniqueProfessors(selectedCourse).length > 0 && (
+                  <Card className="p-6 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Users className="w-5 h-5 text-indigo-400" />
+                      <h3 className="text-white">Professors Teaching This Course</h3>
+                    </div>
+                    <div className="space-y-4">
+                      {getUniqueProfessors(selectedCourse).map((professorName, index) => {
+                        const rating = findProfessorRating(professorName);
+                        return (
+                          <div key={index} className="p-4 bg-slate-700/50 rounded-lg border border-slate-600/50">
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h4 className="text-slate-100 font-medium">{professorName}</h4>
+                                {rating && (
+                                  <p className="text-xs text-slate-400 mt-1">{rating.department}</p>
+                                )}
+                              </div>
+                              {rating ? (
+                                <div className="flex items-center gap-2">
+                                  <div className={`flex items-center gap-1 ${getRatingColor(rating.avgRating)}`}>
+                                    <Star className="w-4 h-4 fill-current" />
+                                    <span className="text-sm font-medium">{rating.avgRating.toFixed(1)}</span>
+                                  </div>
+                                  <Badge variant="outline" className="border-slate-600 text-slate-300 text-xs">
+                                    {rating.numRatings} reviews
+                                  </Badge>
+                                </div>
+                              ) : (
+                                <Badge variant="outline" className="border-slate-600 text-slate-500 text-xs">
+                                  No ratings
+                                </Badge>
+                              )}
+                            </div>
+                            
+                            {rating && (
+                              <div className="grid grid-cols-3 gap-4 text-sm">
+                                <div className="flex items-center gap-2">
+                                  <TrendingUp className="w-4 h-4 text-slate-400" />
+                                  <div>
+                                    <p className="text-slate-400 text-xs">Difficulty</p>
+                                    <p className="text-slate-200 font-medium">{rating.avgDifficulty.toFixed(1)}/5</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <Users className="w-4 h-4 text-slate-400" />
+                                  <div>
+                                    <p className="text-slate-400 text-xs">Would Retake</p>
+                                    <p className="text-slate-200 font-medium">{rating.wouldTakeAgainPercent.toFixed(0)}%</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <Star className="w-4 h-4 text-slate-400" />
+                                  <div>
+                                    <p className="text-slate-400 text-xs">Overall</p>
+                                    <p className={`font-medium ${getRatingColor(rating.avgRating)}`}>
+                                      {rating.avgRating.toFixed(1)}/5
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </Card>
+                )}
+
                 <Card className="p-6 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
                   <div className="flex items-start justify-between mb-4">
                     <div>
