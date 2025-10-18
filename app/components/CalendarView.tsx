@@ -25,7 +25,7 @@ interface CalendarViewProps {
 
 export function CalendarView({ events }: CalendarViewProps) {
   const [view, setView] = useState<'daily' | 'weekly'>('weekly');
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 0, 20)); // Jan 20, 2025 (Monday)
+  const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 18)); // Oct 18, 2025
 
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7 AM to 9 PM

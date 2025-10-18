@@ -127,26 +127,18 @@
   body {
     @apply text-foreground;
     background: linear-gradient(135deg, 
-      #6366f1 0%,
-      #a855f7 25%,
-      #ec4899 40%,
-      #f97316 55%,
-      #fbbf24 70%,
-      #a3e635 85%,
-      #60a5fa 100%);
+      #002E5D 0%,
+      #0047BA 50%,
+      #002E5D 100%);
     background-attachment: fixed;
     min-height: 100vh;
   }
 
   .gradient-bg {
     background: linear-gradient(135deg, 
-      #6366f1 0%,
-      #a855f7 25%,
-      #ec4899 40%,
-      #f97316 55%,
-      #fbbf24 70%,
-      #a3e635 85%,
-      #60a5fa 100%);
+      #002E5D 0%,
+      #0047BA 50%,
+      #002E5D 100%);
   }
 }
 

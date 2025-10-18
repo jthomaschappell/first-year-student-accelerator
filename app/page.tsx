@@ -48,7 +48,7 @@ function UpcomingDeadlinesPanel({ maxItems = 20 }) {
             >
               <div className="flex-1">
                 <div className="text-slate-100">{deadline.title}</div>
-                <div className="text-sm text-slate-400">
+                <div className="text-xs text-slate-100">
                   {deadline.date &&
                     new Date(deadline.date + 'T00:00:00').toLocaleDateString('en-US', {
                       month: 'short',
