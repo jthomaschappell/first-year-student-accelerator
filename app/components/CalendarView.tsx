@@ -29,6 +29,15 @@ export function CalendarView({ events }: CalendarViewProps) {
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7 AM to 9 PM
 
+  // Map day abbreviations to full day names
+  const dayAbbreviationMap: { [key: string]: string } = {
+    'M': 'Monday',
+    'T': 'Tuesday', 
+    'W': 'Wednesday',
+    'Th': 'Thursday',
+    'F': 'Friday'
+  };
+
   const formatTime = (time: string) => {
     const [hours, minutes] = time.split(':');
     const h = parseInt(hours);
@@ -52,11 +61,28 @@ export function CalendarView({ events }: CalendarViewProps) {
 
   const getCurrentDayEvents = () => {
     const dayName = weekDays[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1];
-    return events.filter(event => event.day === dayName || event.date === currentDate.toISOString().split('T')[0]);
+    return events.filter(event => {
+      if (event.date === currentDate.toISOString().split('T')[0]) return true;
+      
+      // Handle day abbreviations
+      const eventDay = event.day;
+      if (!eventDay) return false;
+      
+      const mappedDay = dayAbbreviationMap[eventDay] || eventDay;
+      return mappedDay === dayName;
+    });
   };
 
   const getWeekEvents = (day: string) => {
-    return events.filter(event => event.day === day);
+    return events.filter(event => {
+      // Handle both full day names and abbreviations
+      const eventDay = event.day;
+      if (!eventDay) return false;
+      
+      // If event has abbreviation, map it to full day name
+      const mappedDay = dayAbbreviationMap[eventDay] || eventDay;
+      return mappedDay === day;
+    });
   };
 
   const navigateDate = (direction: 'prev' | 'next') => {
