@@ -1,0 +1,44 @@
+{
+  "generated_at": "2025-10-17T19:30:04.031713",
+  "total_events": 6,
+  "courses": [
+    "MATH 320",
+    "MATH 321",
+    "MATH 344",
+    "MATH 345",
+    "CS 580",
+    "CS 452"
+  ],
+  "events": [
+    {
+      "assignment": "Quiz: Intro to Python",
+      "due_date": "2025-09-04",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Warmup 1: Introduction",
+      "due_date": "2025-09-04",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 1: 1.1 Coding",
+      "due_date": "2025-09-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW1.1",
+      "due_date": "2025-09-05",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Begin: Unix Shell 1\n",
+      "due_date": "2025-09-09",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Assignment 05 (Database Design #1) [C S 452]",
+      "due_date": "2025-09-20",
+      "course": "CS 452"
+    }
+  ]
+}
