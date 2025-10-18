@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import { Input } from '@/app/components/ui/input';
@@ -25,6 +25,12 @@ export function AIAdvisorPanel() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isLoading]);
 
   // Add event listeners for calendar buttons after messages update
   useEffect(() => {
@@ -50,10 +56,10 @@ export function AIAdvisorPanel() {
           content: message,
           timestamp: new Date()
         };
-
+  
         setMessages(prev => [...prev, userMessage]);
         setIsLoading(true);
-
+  
         try {
           const response = await fetch('/api/chat', {
             method: 'POST',
@@ -65,7 +71,7 @@ export function AIAdvisorPanel() {
               }))
             })
           });
-
+  
           const data = await response.json();
           const aiMessage: AIMessage = {
             id: Date.now().toString(),
@@ -82,7 +88,7 @@ export function AIAdvisorPanel() {
         }
       }
     };
-
+  
     document.addEventListener('click', handleCalendarClick);
     return () => document.removeEventListener('click', handleCalendarClick);
   }, [messages]);
@@ -185,7 +191,7 @@ export function AIAdvisorPanel() {
       matches.forEach(match => {
         processedContent = processedContent.replace(match, '');
       });
-
+  
       // Extract any regular text content and clean it up
       const textContent = processedContent
         .replace(/<[^>]*>/g, '') // Remove any remaining HTML tags
@@ -200,7 +206,7 @@ export function AIAdvisorPanel() {
         eventArtifacts
       };
     }
-
+  
     // If not an event listing, process normally
     const eventArtifacts: Array<{ placeholder: string; html: string }> = [];
     let processedContent = content;
@@ -212,7 +218,7 @@ export function AIAdvisorPanel() {
       buttons.push({ placeholder, onClick, text: buttonText });
       return placeholder;
     });
-
+  
     // Extract and replace images with placeholders
     const images: Array<{ placeholder: string; alt: string; url: string }> = [];
     processedContent = processedContent.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, url) => {
@@ -220,7 +226,7 @@ export function AIAdvisorPanel() {
       images.push({ placeholder, alt, url });
       return placeholder;
     });
-
+  
     return {
       content: content.split('\n').map((line: string, lineIdx: number) => {
         const parts = line.split(/(__BUTTON_\d+__|__IMAGE_\d+__)/g);
@@ -293,18 +299,18 @@ export function AIAdvisorPanel() {
 
   const handleSend = async () => {
     if (!input.trim()) return;
-
+  
     const userMessage: AIMessage = {
       id: Date.now().toString(),
       role: 'user',
       content: input,
       timestamp: new Date()
     };
-
+  
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
-
+  
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -316,7 +322,7 @@ export function AIAdvisorPanel() {
           }))
         })
       });
-
+  
       const data = await response.json();
       const aiMessage: AIMessage = {
         id: Date.now().toString(),
@@ -333,121 +339,116 @@ export function AIAdvisorPanel() {
     }
   };
 
-
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 mb-6">
+    <div className="h-full flex flex-col overflow-hidden">
+      {/* Header - Fixed at top */}
+      <div className="flex items-center gap-3 mb-4 flex-shrink-0">
         <Sparkles className="w-5 h-5 text-indigo-400" />
         <h2 className="text-white">AI Study Advisor</h2>
       </div>
 
-      {/* Chat Messages */}
-      <ScrollArea className="flex-1 pr-4 mb-4">
-        <div className="space-y-4">
-          {messages.map(message => {
-            const parsed = parseMessageContent(message.content);
-            return (
-              <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
-                  <Card className={`p-4 ${message.role === 'user' ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg' : 'bg-slate-800/80 backdrop-blur-sm border-slate-700/50 text-slate-100'}`}>
-                    <div className="whitespace-pre-wrap">
-                      {/* Regular content */}
-                      {parsed.content}
-                      
-                      {/* Event Artifacts - rendered inside chat message */}
-                      {parsed.eventArtifacts.length > 0 && (
-                        <div className="space-y-4 mt-4">
-                          {parsed.eventArtifacts.map((artifact, idx) => (
-                            <div 
-                              key={idx}
-                              className="transform transition-all duration-200 hover:scale-[1.02]"
-                              dangerouslySetInnerHTML={{ __html: artifact.html }}
-                            />
-                          ))}
-                        </div>
-                      )}
+      {/* Chat Messages Container - Scrollable middle section */}
+      <ScrollArea className="flex-1 overflow-auto">
+        <div className="space-y-4 pb-4 pr-4">
+            {messages.map(message => {
+              const parsed = parseMessageContent(message.content);
+              return (
+                <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[85%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
+                    <Card className={`p-4 ${message.role === 'user' ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg' : 'bg-slate-800/80 backdrop-blur-sm border-slate-700/50 text-slate-100'}`}>
+                      <div className="whitespace-pre-wrap">
+                        {/* Regular content */}
+                        {parsed.content}
+
+                        {/* Event Artifacts - rendered inside chat message */}
+                        {parsed.eventArtifacts.length > 0 && (
+                          <div className="space-y-4 mt-4">
+                            {parsed.eventArtifacts.map((artifact, idx) => (
+                              <div
+                                key={idx}
+                                className="transform transition-all duration-200 hover:scale-[1.02]"
+                                dangerouslySetInnerHTML={{ __html: artifact.html }}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </Card>
+                    <div className="text-xs text-slate-500 mt-1 px-2">
+                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </div>
-                  </Card>
-                  <div className="text-xs text-slate-500 mt-1 px-2">
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
+              );
+            })}
+            {isLoading && (
+              <div className="flex justify-start">
+                <Card className="p-4 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></div>
+                      <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                    </div>
+                    <span className="text-sm">Thinking...</span>
+                  </div>
+                </Card>
               </div>
-            );
-          })}
-          {isLoading && (
-            <div className="flex justify-start">
-              <Card className="p-4 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
-                <div className="flex items-center gap-2 text-slate-400">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></div>
-                    <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                  </div>
-                  <span className="text-sm">Thinking...</span>
-                </div>
-              </Card>
-            </div>
-          )}
+            )}
+            <div ref={messagesEndRef} />
         </div>
       </ScrollArea>
 
-      {/* Input Area */}
-      <div className="flex gap-2">
-        <Input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-          placeholder="Ask me anything about your schedule or courses..."
-          className="flex-1 bg-slate-800/50 border-slate-700 text-slate-100 placeholder:text-slate-500"
-        />
-        <Button onClick={handleSend} disabled={!input.trim() || isLoading} className="bg-indigo-600 hover:bg-indigo-500">
-          <Send className="w-4 h-4" />
-        </Button>
-      </div>
+      {/* Input Area and Quick Actions - Fixed at bottom */}
+      <div className="mt-4 pt-4 border-t border-slate-700/50 flex-shrink-0">
+        <div className="flex gap-2 mb-3">
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSend()}
+            placeholder="Ask me anything about your schedule or courses..."
+            className="flex-1 bg-slate-800/50 border-slate-700 text-slate-100 placeholder:text-slate-500"
+          />
+          <Button onClick={handleSend} disabled={!input.trim() || isLoading} className="bg-indigo-600 hover:bg-indigo-500">
+            <Send className="w-4 h-4" />
+          </Button>
+        </div>
 
-      {/* Quick Actions */}
-      <div className="flex flex-wrap gap-2 mt-3">
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
-          onClick={() => {
-            setInput("What should I focus on today?");
-          }}
-        >
-          What should I focus on today?
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
-          onClick={() => {
-            setInput("Help me plan my study time");
-          }}
-        >
-          Plan my study time
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
-          onClick={() => {
-            setInput("Tell me about professor ratings");
-          }}
-        >
-          Professor ratings
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
-          onClick={() => {
-            setInput("What events are happening this week?");
-          }}
-        >
-          This week's events
-        </Button>
+        {/* Quick Actions */}
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            onClick={() => setInput("What should I focus on today?")}
+          >
+            What should I focus on today?
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            onClick={() => setInput("Help me plan my study time")}
+          >
+            Plan my study time
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            onClick={() => setInput("Tell me about professor ratings")}
+          >
+            Professor ratings
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100 text-xs"
+            onClick={() => setInput("What events are happening this week?")}
+          >
+            This week's events
+          </Button>
+        </div>
       </div>
     </div>
   );

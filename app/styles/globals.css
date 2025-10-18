@@ -208,3 +208,32 @@
 html {
   font-size: var(--font-size);
 }
+
+/* Custom scrollbar styles */
+.chat-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(71, 85, 105) rgb(30, 41, 59);
+}
+
+.chat-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: rgb(30, 41, 59);
+  border-radius: 6px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background: rgb(71, 85, 105);
+  border-radius: 6px;
+  border: 1px solid rgb(30, 41, 59);
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+  background: rgb(100, 116, 139);
+}
+
+.chat-container::-webkit-scrollbar-corner {
+  background: rgb(30, 41, 59);
+}

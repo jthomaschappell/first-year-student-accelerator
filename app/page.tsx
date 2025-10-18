@@ -67,7 +67,7 @@ export default function HomePage() {
 
               {/* AI Advisor Sidebar */}
               <div className="w-full lg:w-[420px] xl:w-[480px]">
-                <Card className="p-6 h-[800px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl">
+                <Card className="h-[800px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl p-6 flex flex-col overflow-hidden">
                   <AIAdvisorPanel />
                 </Card>
               </div>

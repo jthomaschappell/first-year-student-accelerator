@@ -149,14 +149,14 @@ export function CampusEventsWidget() {
     return `${displayHour}:${minutes} ${ampm}`;
   };
 
-  const sortedEvents = [...events].sort((a, b) => 
-    new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
+  const sortedEvents = [...events]
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .slice(0, 30);
 
   return (
     <Card className="p-4 h-full flex flex-col bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl">
       <h4 className="mb-4 text-white">Campus Events</h4>
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1 overflow-auto max-h-[500px]">
         <div className="space-y-3 pr-4">
           {isLoading ? (
             <div className="text-center text-slate-400 py-8">
