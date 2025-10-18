@@ -5,6 +5,7 @@ import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getUpcomingDeadlines, getRelativeTimeDisplay } from '@/app/utils/scheduleUtils';
 
 interface CalendarEvent {
   id: string;
@@ -29,6 +30,15 @@ export function CalendarView({ events }: CalendarViewProps) {
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7 AM to 9 PM
 
+  // Map day abbreviations to full day names
+  const dayAbbreviationMap: { [key: string]: string } = {
+    'M': 'Monday',
+    'T': 'Tuesday', 
+    'W': 'Wednesday',
+    'Th': 'Thursday',
+    'F': 'Friday'
+  };
+
   const formatTime = (time: string) => {
     const [hours, minutes] = time.split(':');
     const h = parseInt(hours);
@@ -52,11 +62,28 @@ export function CalendarView({ events }: CalendarViewProps) {
 
   const getCurrentDayEvents = () => {
     const dayName = weekDays[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1];
-    return events.filter(event => event.day === dayName || event.date === currentDate.toISOString().split('T')[0]);
+    return events.filter(event => {
+      if (event.date === currentDate.toISOString().split('T')[0]) return true;
+      
+      // Handle day abbreviations
+      const eventDay = event.day;
+      if (!eventDay) return false;
+      
+      const mappedDay = dayAbbreviationMap[eventDay] || eventDay;
+      return mappedDay === dayName;
+    });
   };
 
   const getWeekEvents = (day: string) => {
-    return events.filter(event => event.day === day);
+    return events.filter(event => {
+      // Handle both full day names and abbreviations
+      const eventDay = event.day;
+      if (!eventDay) return false;
+      
+      // If event has abbreviation, map it to full day name
+      const mappedDay = dayAbbreviationMap[eventDay] || eventDay;
+      return mappedDay === day;
+    });
   };
 
   const navigateDate = (direction: 'prev' | 'next') => {
@@ -224,13 +251,20 @@ export function CalendarView({ events }: CalendarViewProps) {
       <Card className="mt-4 p-4 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
         <h4 className="mb-3 text-white">Upcoming Deadlines</h4>
         <div className="space-y-2">
-          {events.filter(e => e.type === 'deadline').slice(0, 4).map(deadline => (
+          {getUpcomingDeadlines(5, new Date(2025, 9, 18)).map(deadline => (
             <div key={deadline.id} className="flex items-center justify-between p-2 bg-slate-700/50 rounded-md">
               <div className="flex-1">
                 <div className="text-slate-100">{deadline.title}</div>
-                <div className="text-sm text-slate-400">{deadline.date}</div>
+                <div className="text-sm text-slate-400">
+                  {deadline.date && new Date(deadline.date + 'T00:00:00').toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                  })}
+                </div>
               </div>
-              <Badge variant="outline" className="border-slate-600 text-slate-300">{deadline.type}</Badge>
+              <Badge variant="outline" className="border-slate-600 text-slate-300">
+                {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
+              </Badge>
             </div>
           ))}
         </div>
