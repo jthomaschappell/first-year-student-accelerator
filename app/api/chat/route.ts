@@ -308,7 +308,40 @@ export async function POST(req: NextRequest) {
       responseMessage = response.choices[0].message;
     }
 
-    return Response.json({ message: responseMessage });
+    // Process response to add calendar buttons for events
+    let processedContent = responseMessage.content || '';
+    
+    // Detect event patterns and add buttons
+    const eventPattern = /\*\*(.*?)\*\*\s*-\s*\*\*Time:\*\*\s*([\d:APM\s]+)/g;
+    let match;
+    const events = [];
+    
+    while ((match = eventPattern.exec(processedContent)) !== null) {
+      const eventName = match[1];
+      const eventTime = match[2];
+      events.push({ name: eventName, time: eventTime });
+    }
+    
+    // Add HTML buttons after each event
+    if (events.length > 0) {
+      processedContent = processedContent.replace(
+        /(\*\*Time:\*\*\s*[\d:APM\s]+)/g,
+        (match, timeStr) => {
+          const event = events.find(e => match.includes(e.time));
+          if (event) {
+            return `${match}\n   <button onclick="console.log('${event.time}')" style="margin: 8px 0; padding: 8px 16px; background: #0066CC; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">📅 Add to Calendar</button>`;
+          }
+          return match;
+        }
+      );
+    }
+
+    return Response.json({ 
+      message: {
+        ...responseMessage,
+        content: processedContent
+      }
+    });
   } catch (error: any) {
     console.error("Chat API error:", error);
     return Response.json({ error: error.message }, { status: 500 });
