@@ -71,6 +71,39 @@ const tools = [
       },
     },
   },
+  {
+    type: "function" as const,
+    function: {
+      name: "search_courses",
+      description: "Search BYU courses by course code, title, or instructor name. Returns course details including sections, times, and locations.",
+      parameters: {
+        type: "object",
+        properties: {
+          course_code: { type: "string", description: "Course code to search (e.g., 'A HTG 100', 'MATH')" },
+          instructor: { type: "string", description: "Instructor name to filter by" },
+        },
+      },
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: "create_calendar_event",
+      description: "Create a new event in Google Calendar. Dates should be in ISO 8601 format (e.g., 2025-10-18T15:00:00-06:00).",
+      parameters: {
+        type: "object",
+        properties: {
+          summary: { type: "string", description: "Event title/summary" },
+          description: { type: "string", description: "Event description" },
+          start_time: { type: "string", description: "Start date/time in ISO 8601 format" },
+          end_time: { type: "string", description: "End date/time in ISO 8601 format" },
+          location: { type: "string", description: "Event location" },
+          time_zone: { type: "string", description: "Time zone (e.g., 'America/Denver'). Default: America/Denver" },
+        },
+        required: ["summary", "start_time", "end_time"],
+      },
+    },
+  },
 ];
 
 function appendParam(url: URL, key: string, value: string | number | undefined) {
@@ -140,6 +173,84 @@ async function callTool(name: string, args: any) {
         return { ...data, events: filtered };
       }
       return data;
+    }
+    
+    case "search_courses": {
+      const dataPath = join(process.cwd(), "data", "courses.json");
+      const data = JSON.parse(readFileSync(dataPath, "utf-8"));
+      
+      let filtered = data;
+      
+      if (args.course_code) {
+        const search = args.course_code.toLowerCase();
+        filtered = filtered.filter((c: any) => 
+          c.course_name.toLowerCase().includes(search) ||
+          c.full_title.toLowerCase().includes(search)
+        );
+      }
+      
+      if (args.instructor) {
+        const search = args.instructor.toLowerCase();
+        filtered = filtered.map((c: any) => ({
+          ...c,
+          sections: c.sections.filter((s: any) =>
+            s.instructor_name.toLowerCase().includes(search)
+          )
+        })).filter((c: any) => c.sections.length > 0);
+      }
+      
+      return filtered;
+    }
+    
+    case "create_calendar_event": {
+      // Check if Google Calendar is configured
+      const hasGoogleCreds = process.env.GOOGLE_OAUTH_CREDENTIALS || process.env.GOOGLE_CALENDAR_CREDENTIALS;
+      
+      if (!hasGoogleCreds) {
+        return {
+          success: false,
+          message: "Google Calendar is not configured. To enable:\n1. Create OAuth credentials at https://console.cloud.google.com\n2. Set GOOGLE_OAUTH_CREDENTIALS in .env.local\n3. Install: npm install @modelcontextprotocol/sdk @cocal/google-calendar-mcp"
+        };
+      }
+      
+      try {
+        // Dynamic import of Google Calendar MCP
+        const { GoogleCalendarMCP } = await import("../../calendar/src/calendarMcpClient.js");
+        
+        const gcal = new GoogleCalendarMCP(
+          process.env.GOOGLE_OAUTH_CREDENTIALS || process.env.GOOGLE_CALENDAR_CREDENTIALS!
+        );
+        
+        await gcal.connect();
+        
+        const result = await gcal.createEvent({
+          summary: args.summary,
+          description: args.description,
+          start: {
+            dateTime: args.start_time,
+            timeZone: args.time_zone || "America/Denver"
+          },
+          end: {
+            dateTime: args.end_time,
+            timeZone: args.time_zone || "America/Denver"
+          },
+          location: args.location,
+        });
+        
+        await gcal.close();
+        
+        return {
+          success: true,
+          event: result,
+          message: "Calendar event created successfully"
+        };
+      } catch (error: any) {
+        return {
+          success: false,
+          error: error.message,
+          message: "Failed to create calendar event. Make sure Google Calendar MCP is properly configured."
+        };
+      }
     }
     
     default:

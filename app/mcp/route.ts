@@ -125,6 +125,42 @@ const handler = createMcpHandler(
         return { content: [{ type: "json", json: data }] };
       },
     );
+
+    // search_courses(course_code?: string, instructor?: string)
+    server.tool(
+      "search_courses",
+      "Search BYU courses by course code, title, or instructor name. Returns course details including sections, times, and locations.",
+      {
+        course_code: z.string().optional(),
+        instructor: z.string().optional(),
+      },
+      async (args: { course_code?: string; instructor?: string }) => {
+        const dataPath = join(process.cwd(), "data", "courses.json");
+        const data = JSON.parse(readFileSync(dataPath, "utf-8"));
+        
+        let filtered = data;
+        
+        if (args.course_code) {
+          const search = args.course_code.toLowerCase();
+          filtered = filtered.filter((c: any) => 
+            c.course_name.toLowerCase().includes(search) ||
+            c.full_title.toLowerCase().includes(search)
+          );
+        }
+        
+        if (args.instructor) {
+          const search = args.instructor.toLowerCase();
+          filtered = filtered.map((c: any) => ({
+            ...c,
+            sections: c.sections.filter((s: any) =>
+              s.instructor_name.toLowerCase().includes(search)
+            )
+          })).filter((c: any) => c.sections.length > 0);
+        }
+        
+        return { content: [{ type: "json", json: filtered }] };
+      },
+    );
   },
   {
     capabilities: {
@@ -133,7 +169,8 @@ const handler = createMcpHandler(
         get_category_event_counts: { description: "Get a list of the number of events by event category name and ID." },
         get_event_categories: { description: "Get a list of all event categories with their names and IDs." },
         get_teacher_ratings: { description: "Get ratings for BYU teachers. Optionally filter by teacher name." },
-        get_assignments: { description: "Get current assignments for courses. Optionally filter by course code." }
+        get_assignments: { description: "Get current assignments for courses. Optionally filter by course code." },
+        search_courses: { description: "Search BYU courses by course code, title, or instructor name." }
       },
     },
   },
