@@ -5,6 +5,7 @@ import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getUpcomingDeadlines, getRelativeTimeDisplay } from '@/app/utils/scheduleUtils';
 
 interface CalendarEvent {
   id: string;
@@ -250,11 +251,16 @@ export function CalendarView({ events }: CalendarViewProps) {
       <Card className="mt-4 p-4 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
         <h4 className="mb-3 text-white">Upcoming Deadlines</h4>
         <div className="space-y-2">
-          {events.filter(e => e.type === 'deadline').slice(0, 4).map(deadline => (
+          {getUpcomingDeadlines(5, new Date(2025, 9, 18)).map(deadline => (
             <div key={deadline.id} className="flex items-center justify-between p-2 bg-slate-700/50 rounded-md">
               <div className="flex-1">
                 <div className="text-slate-100">{deadline.title}</div>
-                <div className="text-sm text-slate-400">{deadline.date}</div>
+                <div className="text-sm text-slate-400">
+                  {deadline.date && new Date(deadline.date).toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                  })} • {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
+                </div>
               </div>
               <Badge variant="outline" className="border-slate-600 text-slate-300">{deadline.type}</Badge>
             </div>

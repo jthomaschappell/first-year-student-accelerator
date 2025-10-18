@@ -87,13 +87,35 @@ export function getAllCalendarEvents(): CalendarEvent[] {
   return events;
 }
 
-export function getUpcomingDeadlines(limit = 5): CalendarEvent[] {
+export function getUpcomingDeadlines(limit = 5, currentDate = new Date()): CalendarEvent[] {
   const events = getAllCalendarEvents();
-  const deadlines = events.filter(e => e.type === 'deadline');
+  const currentDateString = currentDate.toISOString().split('T')[0];
+  
+  const deadlines = events.filter(e => {
+    if (e.type !== 'deadline' || !e.date) return false;
+    return e.date >= currentDateString;
+  });
   
   // Sort by date
   return deadlines.sort((a, b) => {
     if (!a.date || !b.date) return 0;
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   }).slice(0, limit);
+}
+
+export function getRelativeTimeDisplay(dueDate: string, currentDate = new Date()): string {
+  const due = new Date(dueDate);
+  const current = new Date(currentDate);
+  
+  // Set time to start of day for accurate day comparison
+  due.setHours(0, 0, 0, 0);
+  current.setHours(0, 0, 0, 0);
+  
+  const diffTime = due.getTime() - current.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) return "Due today";
+  if (diffDays === 1) return "Due tomorrow";
+  if (diffDays < 0) return "Overdue";
+  return `Due in ${diffDays} days`;
 }
