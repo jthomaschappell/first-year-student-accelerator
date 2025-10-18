@@ -247,28 +247,7 @@ export function CalendarView({ events }: CalendarViewProps) {
         )}
       </div>
 
-      {/* Upcoming Deadlines */}
-      <Card className="mt-4 p-4 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
-        <h4 className="mb-3 text-white">Upcoming Deadlines</h4>
-        <div className="space-y-2">
-          {getUpcomingDeadlines(5, new Date(2025, 9, 18)).map(deadline => (
-            <div key={deadline.id} className="flex items-center justify-between p-2 bg-slate-700/50 rounded-md">
-              <div className="flex-1">
-                <div className="text-slate-100">{deadline.title}</div>
-                <div className="text-sm text-slate-400">
-                  {deadline.date && new Date(deadline.date + 'T00:00:00').toLocaleDateString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric' 
-                  })}
-                </div>
-              </div>
-              <Badge variant="outline" className="border-slate-600 text-slate-300">
-                {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
-              </Badge>
-            </div>
-          ))}
-        </div>
-      </Card>
+      // (Upcoming Deadlines section removed as requested)
     </div>
   );
 }
