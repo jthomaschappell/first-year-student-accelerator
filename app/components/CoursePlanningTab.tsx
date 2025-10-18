@@ -195,9 +195,14 @@ export function CoursePlanningTab() {
                               </div>
                               <div className="text-center p-2 bg-slate-800/50 rounded-md">
                                 <div className="text-xs text-slate-400 mb-1">Would Retake</div>
-                                <div className="flex items-center justify-center gap-1 text-slate-200">
-                                  <Users className="w-3 h-3" />
-                                  <span className="text-sm">{rating.wouldTakeAgain}%</span>
+                                <div className="flex items-center justify-center gap-2">
+                                  <div 
+                                    className="w-6 h-6 rounded-full shadow-sm"
+                                    style={{
+                                      background: `conic-gradient(#10B981 0% ${rating.wouldTakeAgain}%, #EF4444 ${rating.wouldTakeAgain}% 100%)`
+                                    }}
+                                  ></div>
+                                  <span className="text-sm text-slate-200">{rating.wouldTakeAgain}%</span>
                                 </div>
                               </div>
                               <div className="text-center p-2 bg-slate-800/50 rounded-md">

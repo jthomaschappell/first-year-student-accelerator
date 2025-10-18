@@ -11,7 +11,11 @@ import { CampusEventsWidget } from '@/app/components/CampusEventsWidget';
 import { Calendar, BookOpen, GraduationCap } from 'lucide-react';
 import { getAllCalendarEvents, getUpcomingDeadlines, getRelativeTimeDisplay } from '@/app/utils/scheduleUtils';
 
-const DEADLINES_HEIGHT = 800; // px: Same as chatbot panel height, fixed for layout sync
+const PANEL_HEIGHT = 287; // px: Height for Events and AI panels
+const CALENDAR_HEIGHT = 900; // px: Height for calendar
+const DEADLINES_HEIGHT = CALENDAR_HEIGHT - PANEL_HEIGHT; // 100px: Fills remaining space to align with calendar bottom
+
+import { ScrollArea } from '@/app/components/ui/scroll-area';
 
 function UpcomingDeadlinesPanel({ maxItems = 20 }) {
   const deadlines = getUpcomingDeadlines(maxItems, new Date(2025, 9, 18));
@@ -25,35 +29,33 @@ function UpcomingDeadlinesPanel({ maxItems = 20 }) {
         width: '100%',
       }}
     >
-      <h4 className="mb-3 text-white">Upcoming Deadlines</h4>
-      <div
-        className="flex-1 min-h-0 overflow-y-auto space-y-2 pb-2"
-        style={{
-          // The -48px accounts for (h4 title + padding)
-          maxHeight: DEADLINES_HEIGHT - 48,
-        }}
-      >
-        {deadlines.length === 0 && (
-          <div className="text-slate-400 text-sm text-center py-16">No upcoming deadlines found.</div>
-        )}
-        {deadlines.map(deadline => (
-          <div key={deadline.id} className="flex items-center justify-between p-2 bg-slate-800/50 rounded-md">
-            <div className="flex-1">
-              <div className="text-slate-100">{deadline.title}</div>
-              <div className="text-sm text-slate-400">
-                {deadline.date &&
-                  new Date(deadline.date + 'T00:00:00').toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-              </div>
+      <h4 className="mb-3 text-white flex-shrink-0">Upcoming Deadlines</h4>
+      <ScrollArea className="flex-1 overflow-auto">
+        <div className="space-y-2 pr-4">
+          {deadlines.length === 0 && (
+            <div className="text-slate-400 text-sm text-center py-16">
+              No upcoming deadlines found.
             </div>
-            <Badge variant="outline" className="border-slate-600 text-slate-300">
-              {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
-            </Badge>
-          </div>
-        ))}
-      </div>
+          )}
+          {deadlines.map(deadline => (
+            <div key={deadline.id} className="flex items-center justify-between p-2 bg-slate-800/50 rounded-md">
+              <div className="flex-1">
+                <div className="text-slate-100">{deadline.title}</div>
+                <div className="text-sm text-slate-400">
+                  {deadline.date &&
+                    new Date(deadline.date + 'T00:00:00').toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                </div>
+              </div>
+              <Badge variant="outline" className="border-slate-600 text-slate-300">
+                {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
+              </Badge>
+            </div>
+          ))}
+        </div>
+      </ScrollArea>
     </Card>
   );
 }
@@ -93,46 +95,35 @@ export default function HomePage() {
 
           {/* Dashboard Tab: Calendar | Events+Chatbot atop Deadlines */}
           <TabsContent value="dashboard" className="mt-0">
-            <div className="flex flex-col xl:flex-row gap-6">
-              {/* Main Content Area (Calendar) */}
-              <div className="flex-1 min-w-0">
-                <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
-                  {/* Calendar View */}
-                  <div className="xl:col-span-2">
-                    <div className="space-y-4">
-                      <Card className="p-6 h-[900px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl">
-                        <CalendarView events={calendarEvents} />
-                      </Card>
-                    </div>
-                  </div>
+            <div className="grid grid-cols-2 gap-6">
+              {/* Left: Calendar View - 50% width */}
+              <div className="col-span-1">
+                <Card className="p-6 h-[900px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl">
+                  <CalendarView events={calendarEvents} />
+                </Card>
+              </div>
 
-                  {/* Right Panel: Events + Chatbot, both same height, and Deadlines rectangle underneath */}
-                  <div className="xl:col-span-1 flex flex-col gap-6 h-[900px] min-h-0">
-                    {/* Stack Events + Chatbot, then Deadlines */}
-                    <div className="flex-1 flex flex-col min-h-0 gap-6">
-                      {/* Two columns: Events and AI side-by-side, each height = DEADLINES_HEIGHT */}
-                      <div className="flex flex-col h-full min-h-0">
-                        <div className="flex flex-col h-full min-h-0 gap-6 lg:flex-row xl:flex-col">
-                          {/* Events */}
-                          <div className="flex-1 min-h-0 overflow-y-auto">
-                            <Card className="bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl p-4 h-[800px] flex flex-col min-h-0 overflow-hidden">
-                              <CampusEventsWidget />
-                            </Card>
-                          </div>
-                          {/* AI Panel */}
-                          <div className="flex-1 min-h-0 overflow-y-hidden">
-                            <Card className="h-[800px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl p-6 flex flex-col overflow-hidden">
-                              <AIAdvisorPanel />
-                            </Card>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Upcoming Deadlines bar/rectangle supports both above - spans full width & is always below */}
-                    <div className="w-full">
-                      <UpcomingDeadlinesPanel maxItems={20} />
-                    </div>
+              {/* Right Panel: Events + AI side-by-side, Deadlines below - 50% width */}
+              <div className="col-span-1 flex flex-col gap-6">
+                {/* Top row: Events and AI side-by-side */}
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Events */}
+                  <div className="col-span-1">
+                    <Card className="bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl p-4 h-[800px] flex flex-col overflow-hidden">
+                      <CampusEventsWidget />
+                    </Card>
                   </div>
+                  {/* AI Panel */}
+                  <div className="col-span-1">
+                    <Card className="h-[800px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl p-6 flex flex-col overflow-hidden">
+                      <AIAdvisorPanel />
+                    </Card>
+                  </div>
+                </div>
+
+                {/* Bottom: Upcoming Deadlines - full width */}
+                <div className="w-full">
+                  <UpcomingDeadlinesPanel maxItems={20} />
                 </div>
               </div>
             </div>
