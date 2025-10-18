@@ -177,4 +177,15 @@ Future-proof: Easy to plug in new data sources or AI models.
 
 
 
+```mermaid
+graph TD
+	A[User] --> B[Frontend UI]
+	B --> C["Backend (APIs + Supabase)"]
+	C --> D["MCP Server (AI Gateway)"]
+	D --> E[LLM Model]
+	E --> D
+	D --> B
+	C --> F[("External APIs:<br/>Google Calendar,<br/>Course Catalog,<br/>RMP")]
+```
 
+------
