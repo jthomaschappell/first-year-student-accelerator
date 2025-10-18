@@ -87,4 +87,4 @@ console.log(`Found ${results6.length} results:`);
 results6.forEach(prof => console.log(`  - ${prof.firstName} ${prof.lastName} (${prof.department})`));
 console.log();
 
-console.log('Search functionality test completed!');
+console.log('Search functionality test completed!');ou 
