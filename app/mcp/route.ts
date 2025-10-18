@@ -1,5 +1,7 @@
 import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 // Helper to build query params safely
 function appendParam(url: URL, key: string, value: string | number | undefined) {
@@ -77,6 +79,52 @@ const handler = createMcpHandler(
         return { content: [{ type: "json", json }] };
       },
     );
+
+    // get_teacher_ratings(teacher_name?: string)
+    server.tool(
+      "get_teacher_ratings",
+      "Get ratings for BYU teachers. Optionally filter by teacher name (first or last).",
+      {
+        teacher_name: z.string().optional(),
+      },
+      async (args: { teacher_name?: string }) => {
+        const dataPath = join(process.cwd(), "data", "teacher_ratings.json");
+        const data = JSON.parse(readFileSync(dataPath, "utf-8"));
+        
+        if (args.teacher_name) {
+          const search = args.teacher_name.toLowerCase();
+          const filtered = data.filter((t: any) => 
+            t.firstName.toLowerCase().includes(search) || 
+            t.lastName.toLowerCase().includes(search)
+          );
+          return { content: [{ type: "json", json: filtered }] };
+        }
+        
+        return { content: [{ type: "json", json: data }] };
+      },
+    );
+
+    // get_assignments(course?: string)
+    server.tool(
+      "get_assignments",
+      "Get current assignments for courses. Optionally filter by course code (e.g., 'MATH 320').",
+      {
+        course: z.string().optional(),
+      },
+      async (args: { course?: string }) => {
+        const dataPath = join(process.cwd(), "data", "current_assignments.json");
+        const data = JSON.parse(readFileSync(dataPath, "utf-8"));
+        
+        if (args.course) {
+          const filtered = data.events.filter((e: any) => 
+            e.course.toLowerCase().includes(args.course!.toLowerCase())
+          );
+          return { content: [{ type: "json", json: { ...data, events: filtered } }] };
+        }
+        
+        return { content: [{ type: "json", json: data }] };
+      },
+    );
   },
   {
     capabilities: {
@@ -84,6 +132,8 @@ const handler = createMcpHandler(
         query_events: { description: "Query events from the BYU events API based on filters." },
         get_category_event_counts: { description: "Get a list of the number of events by event category name and ID." },
         get_event_categories: { description: "Get a list of all event categories with their names and IDs." },
+        get_teacher_ratings: { description: "Get ratings for BYU teachers. Optionally filter by teacher name." },
+        get_assignments: { description: "Get current assignments for courses. Optionally filter by course code." }
       },
     },
   },

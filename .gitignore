@@ -1,1 +1,5 @@
 *.ics
+node_modules/
+.next/
+data/
+app/.env
