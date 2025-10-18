@@ -27,9 +27,81 @@ export function AIAdvisorPanel() {
   const [isLoading, setIsLoading] = useState(false);
 
   const parseMessageContent = (content: string) => {
-    // First, extract and replace buttons with placeholders
+    // First check if this is a pre-formatted event artifact
+    if (content.includes('<div class="event-artifact"')) {
+      const eventArtifacts = [];
+      let processedContent = content;
+      
+      // More robust regex that matches complete event-artifact divs with all nested content
+      // This matches the opening tag and finds the matching closing tag by counting div depth
+      const matches: string[] = [];
+      let startPos = 0;
+      
+      while (true) {
+        const startIndex = processedContent.indexOf('<div class="event-artifact"', startPos);
+        if (startIndex === -1) break;
+        
+        // Find matching closing tag by counting div depth
+        let depth = 0;
+        let i = startIndex;
+        let endIndex = -1;
+        
+        while (i < processedContent.length) {
+          if (processedContent.substring(i, i + 4) === '<div') {
+            depth++;
+            i += 4;
+          } else if (processedContent.substring(i, i + 6) === '</div>') {
+            depth--;
+            if (depth === 0) {
+              endIndex = i + 6;
+              break;
+            }
+            i += 6;
+          } else {
+            i++;
+          }
+        }
+        
+        if (endIndex !== -1) {
+          const artifactHtml = processedContent.substring(startIndex, endIndex);
+          matches.push(artifactHtml);
+          eventArtifacts.push({
+            placeholder: `__EVENT_${eventArtifacts.length}__`,
+            html: artifactHtml
+          });
+          startPos = endIndex;
+        } else {
+          break;
+        }
+      }
+      
+      // Remove all matched artifacts from content
+      matches.forEach(match => {
+        processedContent = processedContent.replace(match, '');
+      });
+
+      // Extract any regular text content and clean it up
+      const textContent = processedContent
+        .replace(/<[^>]*>/g, '') // Remove any remaining HTML tags
+        .trim();
+      
+      return {
+        content: textContent ? [
+          <div key="text" className="mb-4">
+            {textContent}
+          </div>
+        ] : [],
+        eventArtifacts
+      };
+    }
+
+    // If not an event listing, process normally
+    const eventArtifacts: Array<{ placeholder: string; html: string }> = [];
+    let processedContent = content;
+    
+    // Extract and replace buttons with placeholders
     const buttons: Array<{ placeholder: string; onClick: string; text: string }> = [];
-    let processedContent = content.replace(/<button[^>]*onclick="([^"]*)"[^>]*>(.*?)<\/button>/g, (match, onClick, buttonText) => {
+    processedContent = processedContent.replace(/<button[^>]*onclick="([^"]*)"[^>]*>(.*?)<\/button>/g, (match, onClick, buttonText) => {
       const placeholder = `__BUTTON_${buttons.length}__`;
       buttons.push({ placeholder, onClick, text: buttonText });
       return placeholder;
@@ -43,62 +115,54 @@ export function AIAdvisorPanel() {
       return placeholder;
     });
 
-    // Split by lines and process
-    const lines = processedContent.split('\n');
-    
-    return lines.map((line, lineIdx) => {
-      // Check if line contains a button or image placeholder
-      const parts = line.split(/(__BUTTON_\d+__|__IMAGE_\d+__)/g);
-      
-      return (
-        <div key={lineIdx} className="mb-2">
-          {parts.map((part, partIdx) => {
-            // Check if this part is a button placeholder
-            const button = buttons.find(b => b.placeholder === part);
-            if (button) {
-              return (
-                <Button
-                  key={partIdx}
-                  size="sm"
-                  className="ml-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-full border-2 border-blue-300 shadow-md inline-flex items-center gap-2 font-medium"
-                  onClick={() => {
-                    console.log('add to calendar');
-                  }}
-                >
-                  {button.text}
-                </Button>
-              );
-            }
-            
-            // Check if this part is an image placeholder
-            const image = images.find(img => img.placeholder === part);
-            if (image) {
-              return (
-                <div key={partIdx} className="my-3">
-                  <img 
-                    src={image.url} 
-                    alt={image.alt} 
-                    className="rounded-lg max-w-full h-auto shadow-lg"
-                    style={{ maxHeight: '300px', objectFit: 'cover' }}
-                  />
-                </div>
-              );
-            }
-            
-            // Process markdown in text
-            let textContent = part;
-            
-            // Bold text
-            textContent = textContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            
-            // Links
-            textContent = textContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">$1</a>');
-            
-            return <span key={partIdx} dangerouslySetInnerHTML={{ __html: textContent }} />;
-          })}
-        </div>
-      );
-    });
+    return {
+      content: content.split('\n').map((line: string, lineIdx: number) => {
+        const parts = line.split(/(__BUTTON_\d+__|__IMAGE_\d+__)/g);
+        
+        return (
+          <div key={lineIdx} className="mb-2">
+            {parts.map((part: string, partIdx: number) => {
+              const button = buttons.find(b => b.placeholder === part);
+              if (button) {
+                return (
+                  <Button
+                    key={partIdx}
+                    size="sm"
+                    className="ml-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-full border-2 border-blue-300 shadow-md inline-flex items-center gap-2 font-medium"
+                    onClick={() => {
+                      console.log('add to calendar');
+                    }}
+                  >
+                    {button.text}
+                  </Button>
+                );
+              }
+              
+              const image = images.find(img => img.placeholder === part);
+              if (image) {
+                return (
+                  <div key={partIdx} className="my-3">
+                    <img 
+                      src={image.url} 
+                      alt={image.alt} 
+                      className="rounded-lg max-w-full h-auto shadow-lg"
+                      style={{ maxHeight: '300px', objectFit: 'cover' }}
+                    />
+                  </div>
+                );
+              }
+              
+              let textContent = part;
+              textContent = textContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+              textContent = textContent.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">$1</a>');
+              
+              return <span key={partIdx} dangerouslySetInnerHTML={{ __html: textContent }} />;
+            })}
+          </div>
+        );
+      }),
+      eventArtifacts
+    };
   };
 
   const handleSend = async () => {
@@ -154,23 +218,37 @@ export function AIAdvisorPanel() {
       {/* Chat Messages */}
       <ScrollArea className="flex-1 pr-4 mb-4">
         <div className="space-y-4">
-          {messages.map(message => (
-            <div
-              key={message.id}
-              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className={`max-w-[85%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
-                <Card className={`p-4 ${message.role === 'user' ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg' : 'bg-slate-800/80 backdrop-blur-sm border-slate-700/50 text-slate-100'}`}>
-                  <div className="whitespace-pre-wrap">
-                    {parseMessageContent(message.content)}
+          {messages.map(message => {
+            const parsed = parseMessageContent(message.content);
+            return (
+              <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[85%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
+                  <Card className={`p-4 ${message.role === 'user' ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg' : 'bg-slate-800/80 backdrop-blur-sm border-slate-700/50 text-slate-100'}`}>
+                    <div className="whitespace-pre-wrap">
+                      {/* Regular content */}
+                      {parsed.content}
+                      
+                      {/* Event Artifacts - rendered inside chat message */}
+                      {parsed.eventArtifacts.length > 0 && (
+                        <div className="space-y-4 mt-4">
+                          {parsed.eventArtifacts.map((artifact, idx) => (
+                            <div 
+                              key={idx}
+                              className="transform transition-all duration-200 hover:scale-[1.02]"
+                              dangerouslySetInnerHTML={{ __html: artifact.html }}
+                            />
+                          ))}
+                        </div>
+                      )}
                     </div>
-                </Card>
-                <div className="text-xs text-slate-500 mt-1 px-2">
-                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </Card>
+                  <div className="text-xs text-slate-500 mt-1 px-2">
+                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           {isLoading && (
             <div className="flex justify-start">
               <Card className="p-4 bg-slate-800/80 backdrop-blur-sm border-slate-700/50">
@@ -233,6 +311,16 @@ export function AIAdvisorPanel() {
           }}
         >
           About my professors
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
+          onClick={() => {
+            setInput("What events are happening this week?");
+          }}
+        >
+          This week's events
         </Button>
       </div>
     </div>

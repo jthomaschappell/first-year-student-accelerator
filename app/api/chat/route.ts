@@ -264,7 +264,47 @@ export async function POST(req: NextRequest) {
 
     const systemMessage = {
       role: "system" as const,
-      content: "You are a helpful assistant for BYU students. Today's date is October 18, 2025. When users ask about 'this week', use dates from October 18-24, 2025. Format dates as YYYY-MM-DD when calling tools."
+      content: `You are a helpful assistant for BYU students. Today's date is October 18, 2025. When users ask about 'this week', use dates from October 18-24, 2025. Format dates as YYYY-MM-DD when calling tools.
+
+IMPORTANT: When displaying event information from the query_events tool, format each event as an artifact using this EXACT HTML structure. You can add a friendly intro message before the artifacts, then list each event:
+
+<div class="event-artifact" style="background: linear-gradient(to bottom right, #1F2937, #111827); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(75, 85, 99, 0.3); backdrop-filter: blur(8px);">
+  <div style="background: linear-gradient(to right, #2563EB, #1D4ED8); color: white; padding: 16px; border-radius: 12px 12px 0 0; margin: -20px -20px 16px -20px; font-weight: 600; font-size: 18px; letter-spacing: 0.025em; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);">
+    [EVENT TITLE]
+  </div>
+  <div style="margin-bottom: 16px;">
+    <img src="[EVENT IMAGE URL]" alt="[EVENT TITLE]" style="width: 100%; height: 240px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);" />
+  </div>
+  <div style="color: #E5E7EB; font-size: 15px; line-height: 1.6; display: grid; gap: 12px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <strong style="color: #60A5FA; min-width: 100px;">Date:</strong>
+      <span>[EVENT DATE]</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <strong style="color: #60A5FA; min-width: 100px;">Time:</strong>
+      <span>[EVENT TIME]</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <strong style="color: #60A5FA; min-width: 100px;">Location:</strong>
+      <span>[EVENT LOCATION]</span>
+    </div>
+    <div style="display: flex; align-items: start; gap: 8px;">
+      <strong style="color: #60A5FA; min-width: 100px;">Description:</strong>
+      <span style="flex: 1;">[EVENT DESCRIPTION]</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <strong style="color: #60A5FA; min-width: 100px;">Category:</strong>
+      <span style="background: rgba(37, 99, 235, 0.2); color: #93C5FD; padding: 4px 12px; border-radius: 9999px; font-size: 14px;">[EVENT CATEGORY]</span>
+    </div>
+  </div>
+</div>
+
+CRITICAL RULES:
+1. ALL event information (especially the TITLE) must be INSIDE the event-artifact div
+2. The title goes in the blue header div at the top of each artifact
+3. Do NOT list event titles separately outside the artifacts
+4. Each event should be its own complete self-contained artifact
+5. Add friendly intro/outro text outside the artifacts, but never duplicate event titles outside`
     };
 
     const messagesWithSystem = [systemMessage, ...messages];
@@ -308,33 +348,11 @@ export async function POST(req: NextRequest) {
       responseMessage = response.choices[0].message;
     }
 
-    // Process response to add calendar buttons for events
+    // Process response content
     let processedContent = responseMessage.content || '';
     
-    // Detect event patterns and add buttons
-    const eventPattern = /\*\*(.*?)\*\*\s*-\s*\*\*Time:\*\*\s*([\d:APM\s]+)/g;
-    let match;
-    const events: { name: string; time: string }[] = [];
-    
-    while ((match = eventPattern.exec(processedContent)) !== null) {
-      const eventName = match[1];
-      const eventTime = match[2];
-      events.push({ name: eventName, time: eventTime });
-    }
-    
-    // Add HTML buttons after each event
-    if (events.length > 0) {
-      processedContent = processedContent.replace(
-        /(\*\*Time:\*\*\s*[\d:APM\s]+)/g,
-        (match, timeStr) => {
-          const event = events.find(e => match.includes(e.time));
-          if (event) {
-            return `${match}\n   <button onclick="console.log('${event.time}')" style="margin: 8px 0; padding: 8px 16px; background: #0066CC; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">📅 Add to Calendar</button>`;
-          }
-          return match;
-        }
-      );
-    }
+    // The AI will now format events as HTML artifacts directly, so no additional processing needed
+    // The event artifacts are already properly formatted in the response
 
     return Response.json({ 
       message: {
