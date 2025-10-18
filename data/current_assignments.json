@@ -1,0 +1,1909 @@
+{
+  "generated_at": "2025-10-17T19:30:04.031713",
+  "total_events": 379,
+  "courses": [
+    "MATH 320",
+    "MATH 321",
+    "MATH 344",
+    "MATH 345",
+    "CS 580",
+    "CS 452"
+  ],
+  "events": [
+    {
+      "assignment": "Quiz: Intro to Python",
+      "due_date": "2025-09-04",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Attendance: Intro to Python",
+      "due_date": "2025-09-04",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Warmup 1: Introduction",
+      "due_date": "2025-09-04",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 1: 1.1 Coding",
+      "due_date": "2025-09-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 1: 1.1 Written",
+      "due_date": "2025-09-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: Introductions",
+      "due_date": "2025-09-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 1.1 and 1.2",
+      "due_date": "2025-09-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW1.1",
+      "due_date": "2025-09-05",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 1.2",
+      "due_date": "2025-09-05",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Recitation 1: Q&A: Math Review",
+      "due_date": "2025-09-05",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 2: 1.2 Written",
+      "due_date": "2025-09-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 2: 1.2 Coding",
+      "due_date": "2025-09-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 1.3",
+      "due_date": "2025-09-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW1.2",
+      "due_date": "2025-09-08",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 1.3",
+      "due_date": "2025-09-08",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Begin: Unix Shell 1\n",
+      "due_date": "2025-09-09",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Unix Shell 1",
+      "due_date": "2025-09-09",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Reading 1: Reach and Explanations: Chapters 1 and 2",
+      "due_date": "2025-09-09",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 2: Linear algebra review",
+      "due_date": "2025-09-09",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 3: 1.3",
+      "due_date": "2025-09-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 1.4",
+      "due_date": "2025-09-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW1.3",
+      "due_date": "2025-09-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 1.4",
+      "due_date": "2025-09-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Homework 1: Definition of Vectors",
+      "due_date": "2025-09-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 2: Polynomials as Vectors",
+      "due_date": "2025-09-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 3: System Solution Dependence",
+      "due_date": "2025-09-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 4: Change of Basis",
+      "due_date": "2025-09-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Attendance: Standard Library",
+      "due_date": "2025-09-11",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Quiz: Standard Library",
+      "due_date": "2025-09-11",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Warmup 3: Linear Regression",
+      "due_date": "2025-09-11",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 4: 1.4",
+      "due_date": "2025-09-12",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 1.5",
+      "due_date": "2025-09-12",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW1.4",
+      "due_date": "2025-09-12",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 1.5",
+      "due_date": "2025-09-12",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Unix Shell 1\n",
+      "due_date": "2025-09-12",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 5: Eigenvalues vs Singular Values",
+      "due_date": "2025-09-12",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 6: Surface Gradients",
+      "due_date": "2025-09-12",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 7: Fundamental Subspaces",
+      "due_date": "2025-09-12",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Recitation 2: Q&A: Linear Regression",
+      "due_date": "2025-09-12",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 1: RYL 1",
+      "due_date": "2025-09-13",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 5: 1.5 Coding",
+      "due_date": "2025-09-15",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 5: 1.5 Written",
+      "due_date": "2025-09-15",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 1.7",
+      "due_date": "2025-09-15",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW1.5",
+      "due_date": "2025-09-15",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.1",
+      "due_date": "2025-09-15",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Due: Unix Shell 1\nBegin: Intro to Numpy\n",
+      "due_date": "2025-09-16",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Intro to NumPy",
+      "due_date": "2025-09-16",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 4: Learning and Control problems",
+      "due_date": "2025-09-16",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 6: 1.7",
+      "due_date": "2025-09-17",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 1.8-1.9",
+      "due_date": "2025-09-17",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW2.1 ",
+      "due_date": "2025-09-17",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.2",
+      "due_date": "2025-09-17",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Homework 8: Learning and Control Problems",
+      "due_date": "2025-09-17",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 9: Matrix Norms",
+      "due_date": "2025-09-17",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 10: Condition Number",
+      "due_date": "2025-09-17",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 11: SVD and Image Compression",
+      "due_date": "2025-09-17",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Quiz: Intro to Matplotlib",
+      "due_date": "2025-09-18",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Attendance: Intro to Matplotlib",
+      "due_date": "2025-09-18",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Reading 2: The Spark: Chapter 3",
+      "due_date": "2025-09-18",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 5: Statistical Inference",
+      "due_date": "2025-09-18",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 7: 1.8-1.9 Written",
+      "due_date": "2025-09-19",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 7: 1.8-1.9 Coding",
+      "due_date": "2025-09-19",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 1.10",
+      "due_date": "2025-09-19",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW2.2",
+      "due_date": "2025-09-19",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.3",
+      "due_date": "2025-09-19",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Intro to Numpy\n",
+      "due_date": "2025-09-19",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 12: LLS Formula Derviation",
+      "due_date": "2025-09-19",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 13: Pop Modeling",
+      "due_date": "2025-09-19",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Recitation 3: Practice with Probability",
+      "due_date": "2025-09-19",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 2: RYL 2",
+      "due_date": "2025-09-20",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Assignment 05 (Database Design #1) [C S 452]",
+      "due_date": "2025-09-20",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "In Person SQL Interview Medium (with hints TA only) [C S 452]",
+      "due_date": "2025-09-20",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "LeetCode! Choose 10 more! SQL  [C S 452]",
+      "due_date": "2025-09-20",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 8: 1.10 Written",
+      "due_date": "2025-09-22",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 8: 1.10 Coding",
+      "due_date": "2025-09-22",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 2.1",
+      "due_date": "2025-09-22",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW2.3",
+      "due_date": "2025-09-22",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.4",
+      "due_date": "2025-09-22",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Due: Intro to NumpyBegin: Object-Oriented Programming",
+      "due_date": "2025-09-23",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Object Oriented Programming",
+      "due_date": "2025-09-23",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 6: Intro to Uncertainty Quantification",
+      "due_date": "2025-09-23",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Assignment 06 (Database Design #2) [C S 452]",
+      "due_date": "2025-09-23",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "ERD Tires, Stores, Employees, Customers [C S 452]",
+      "due_date": "2025-09-23",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 9: 2.1",
+      "due_date": "2025-09-24",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 3.1",
+      "due_date": "2025-09-24",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "ACME Class Presidential election ",
+      "due_date": "2025-09-24",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "HW2.4",
+      "due_date": "2025-09-24",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.5",
+      "due_date": "2025-09-24",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Homework 14: Exponential Distribution",
+      "due_date": "2025-09-24",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 15: Uncertainty Propogation",
+      "due_date": "2025-09-24",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Attendance: Unit Testing",
+      "due_date": "2025-09-25",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Quiz: Unit Testing",
+      "due_date": "2025-09-25",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Warmup 7: Bias-variance Tradeoff",
+      "due_date": "2025-09-25",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 10: 3.1",
+      "due_date": "2025-09-26",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 3.2",
+      "due_date": "2025-09-26",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW2.5",
+      "due_date": "2025-09-26",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.6",
+      "due_date": "2025-09-26",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Object-Oriented Programming\n",
+      "due_date": "2025-09-26",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 16: Pop Modeling Revisited",
+      "due_date": "2025-09-26",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 17: Bias Variance Tradeoff",
+      "due_date": "2025-09-26",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Recitation 4: Review of Programming Tools",
+      "due_date": "2025-09-26",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 3: RYL 3",
+      "due_date": "2025-09-27",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Assignment 07 (Database Programming) [C S 452]",
+      "due_date": "2025-09-27",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "ERD Your Choice  - Homework (Design Database, Populate Real or Realistic Data) [C S 452]",
+      "due_date": "2025-09-27",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Natural Language (AI) SQL Project [C S 452]",
+      "due_date": "2025-09-27",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "In Person SQL Interview Medium (no hints TA only) [C S 452]",
+      "due_date": "2025-09-27",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 11: 3.2",
+      "due_date": "2025-09-29",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 3.3",
+      "due_date": "2025-09-29",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW2.6",
+      "due_date": "2025-09-29",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.7",
+      "due_date": "2025-09-29",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Due: Object-Oriented ProgrammingBegin: Exceptions and File I/O",
+      "due_date": "2025-09-30",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Exceptions and File I/O",
+      "due_date": "2025-09-30",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 8: Generalized Aliasing",
+      "due_date": "2025-09-30",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Assignment 08 (Complex Types) [C S 452]",
+      "due_date": "2025-09-30",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Review AI DB Projects [C S 452]",
+      "due_date": "2025-09-30",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 12: 3.3",
+      "due_date": "2025-10-01",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 3.4",
+      "due_date": "2025-10-01",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW2.7",
+      "due_date": "2025-10-01",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 2.8/2.9",
+      "due_date": "2025-10-01",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Class Presidential Election",
+      "due_date": "2025-10-01",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 18: Cross Validation",
+      "due_date": "2025-10-01",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 19: GAD",
+      "due_date": "2025-10-01",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Quiz: Binary Search Trees",
+      "due_date": "2025-10-02",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Attendance: Binary Search Trees",
+      "due_date": "2025-10-02",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Presidential Election",
+      "due_date": "2025-10-02",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Reading 3: Abstractions: Chapters 4 and 5",
+      "due_date": "2025-10-02",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 9: Generalizing the Learning Problem",
+      "due_date": "2025-10-02",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 13: 3.4",
+      "due_date": "2025-10-03",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 4.1",
+      "due_date": "2025-10-03",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW2.8/2.9",
+      "due_date": "2025-10-03",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.1",
+      "due_date": "2025-10-03",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Exceptions and File I/O\n",
+      "due_date": "2025-10-03",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 20: Heteroscedastic Error",
+      "due_date": "2025-10-03",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 21: Confirming Variance",
+      "due_date": "2025-10-03",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Recitation 5: Parameter Uncertainty and More Programming",
+      "due_date": "2025-10-03",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Midterm Entity Relationship Diagram (ERD) [C S 452]",
+      "due_date": "2025-10-04",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Midterm SQL (With AI) [C S 452]",
+      "due_date": "2025-10-04",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Midterm SQL (Without AI, Open Book) [C S 452]",
+      "due_date": "2025-10-04",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 14: 4.1 Coding",
+      "due_date": "2025-10-06",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 14: 4.1 Written",
+      "due_date": "2025-10-06",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 4.2",
+      "due_date": "2025-10-06",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW3.1",
+      "due_date": "2025-10-06",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.2",
+      "due_date": "2025-10-06",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Due: Exceptions and File I/OBegin: Linear Transformations",
+      "due_date": "2025-10-07",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Linear Transformations",
+      "due_date": "2025-10-07",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Reading 4: Universality and AI: Chapters 6 and 7",
+      "due_date": "2025-10-07",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 10: Geometry of Nonlinear Least Squares",
+      "due_date": "2025-10-07",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Vector DBs: Podcast Recommender System [C S 452]",
+      "due_date": "2025-10-07",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 15: 4.2",
+      "due_date": "2025-10-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 4.3",
+      "due_date": "2025-10-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 22: Variance by Basis",
+      "due_date": "2025-10-08",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 23: Noisy Norm",
+      "due_date": "2025-10-08",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 11: Nonlinear Uncertainty Quantification",
+      "due_date": "2025-10-09",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 16: 4.3",
+      "due_date": "2025-10-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 4.4/4.5",
+      "due_date": "2025-10-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Exam 1",
+      "due_date": "2025-10-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "HW3.2",
+      "due_date": "2025-10-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.3",
+      "due_date": "2025-10-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Linear Transformations\n",
+      "due_date": "2025-10-10",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 24: AutoDiff Practice",
+      "due_date": "2025-10-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 25: Parameter Uncertainty",
+      "due_date": "2025-10-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Recitation 6: Q&A: Nonlinear UQ",
+      "due_date": "2025-10-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 4: RYL 4",
+      "due_date": "2025-10-11",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Assignment 09 (NoSQL Databases) [C S 452]",
+      "due_date": "2025-10-11",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Conference Talk Retrieval Augmented Generation (RAG) [C S 452]",
+      "due_date": "2025-10-11",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "NoSQL Pre-Quiz [C S 452]",
+      "due_date": "2025-10-11",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 17: 4.4/4.5 Coding",
+      "due_date": "2025-10-13",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 17: 4.4/4.5 Written",
+      "due_date": "2025-10-13",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: Exam 1 Review",
+      "due_date": "2025-10-13",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW3.3",
+      "due_date": "2025-10-13",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.5",
+      "due_date": "2025-10-13",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Due: Linear Transformations\nBegin: Linear Systems\n",
+      "due_date": "2025-10-14",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Linear Systems",
+      "due_date": "2025-10-14",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 12: Levenberg-Marquardt",
+      "due_date": "2025-10-14",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Scaling, Reliability, Security, and System Design [C S 452]",
+      "due_date": "2025-10-14",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Exam 1",
+      "due_date": "2025-10-15",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 5.1",
+      "due_date": "2025-10-15",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW3.5",
+      "due_date": "2025-10-15",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.6",
+      "due_date": "2025-10-15",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Homework 26: Nonlinear Regression",
+      "due_date": "2025-10-15",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 27: NonLinear FIM",
+      "due_date": "2025-10-15",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Attendance: Nearest Neighbors",
+      "due_date": "2025-10-16",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Quiz: Nearest Neighbor",
+      "due_date": "2025-10-16",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Warmup 13: Practical Identifiability",
+      "due_date": "2025-10-16",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 18: 5.1",
+      "due_date": "2025-10-17",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 5.2",
+      "due_date": "2025-10-17",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW3.6",
+      "due_date": "2025-10-17",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.7",
+      "due_date": "2025-10-17",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Linear Systems\n",
+      "due_date": "2025-10-17",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 28: Inital Parameter Guess",
+      "due_date": "2025-10-17",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Recitation 7: Practical Identifiability",
+      "due_date": "2025-10-17",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 5: RYL 5",
+      "due_date": "2025-10-18",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Redis Project [C S 452]",
+      "due_date": "2025-10-18",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 19: 5.2",
+      "due_date": "2025-10-20",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 5.3",
+      "due_date": "2025-10-20",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW3.7 ",
+      "due_date": "2025-10-20",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.8",
+      "due_date": "2025-10-20",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Due: Linear Systems\nBegin: QR Decomposition\n",
+      "due_date": "2025-10-21",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: QR Decomposition",
+      "due_date": "2025-10-21",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Reading 5: Infinity: Chapter 8",
+      "due_date": "2025-10-21",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 14: Circle the Wagons",
+      "due_date": "2025-10-21",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "GraphDB (Neo4J): Academic Papers [C S 452]",
+      "due_date": "2025-10-21",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 20: 5.3 Coding",
+      "due_date": "2025-10-22",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 20: 5.3 Written",
+      "due_date": "2025-10-22",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 5.4",
+      "due_date": "2025-10-22",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW3.8",
+      "due_date": "2025-10-22",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 3.9",
+      "due_date": "2025-10-22",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Attendance: Breadth-First Search",
+      "due_date": "2025-10-23",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Quiz: Breadth First Search",
+      "due_date": "2025-10-23",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Reading 6: Optimism: Chapters 9 and 10",
+      "due_date": "2025-10-23",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 15: Dynamic Systems",
+      "due_date": "2025-10-23",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Reading Assignment: 5.5",
+      "due_date": "2025-10-24",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW3.9",
+      "due_date": "2025-10-24",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 4.1",
+      "due_date": "2025-10-24",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: QR Decomposition\n",
+      "due_date": "2025-10-24",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 30: Linearization Practice",
+      "due_date": "2025-10-24",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Recitation 8: Dynamic Systems",
+      "due_date": "2025-10-24",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 6: RYL 6",
+      "due_date": "2025-10-25",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "[Not Ready] MongoDB Basics TODO and beyond... [C S 452]",
+      "due_date": "2025-10-25",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 21: 5.4",
+      "due_date": "2025-10-27",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 5.6",
+      "due_date": "2025-10-27",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW4.1",
+      "due_date": "2025-10-27",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 4.2",
+      "due_date": "2025-10-27",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Due: QR Decomposition\nBegin: Least Squares\n",
+      "due_date": "2025-10-28",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Least Squares and Computing Eigenvalues",
+      "due_date": "2025-10-28",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 16: State-space models of Dynamical Systems",
+      "due_date": "2025-10-28",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "MongoDB Project [C S 452]",
+      "due_date": "2025-10-28",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 22: 5.5",
+      "due_date": "2025-10-29",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Mid-course evaluation",
+      "due_date": "2025-10-29",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW4.2",
+      "due_date": "2025-10-29",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 4.3",
+      "due_date": "2025-10-29",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Attendance: Dijkstra's Algorithm",
+      "due_date": "2025-10-30",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Quiz: Dijkstra's Algorithm",
+      "due_date": "2025-10-30",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Reading 7: The Multiverse: Chapters 11 and 12",
+      "due_date": "2025-10-30",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 17: Transfer Functions",
+      "due_date": "2025-10-30",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 23: 5.6",
+      "due_date": "2025-10-31",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 5.7",
+      "due_date": "2025-10-31",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW4.3",
+      "due_date": "2025-10-31",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 4.4",
+      "due_date": "2025-10-31",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Least Squares\n",
+      "due_date": "2025-10-31",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Recitation 9: State Space & Transfer Function",
+      "due_date": "2025-10-31",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 32: Project Proposal",
+      "due_date": "2025-11-01",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 7: RYL 7",
+      "due_date": "2025-11-01",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "[Not Ready] Spark Word Count [C S 452]",
+      "due_date": "2025-11-01",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "[Not Ready] SparkSQL Project [C S 452]",
+      "due_date": "2025-11-01",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Assignment 10 (Database Architecture and Warehouse) [C S 452]",
+      "due_date": "2025-11-01",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 24: 5.7",
+      "due_date": "2025-11-03",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 6.1",
+      "due_date": "2025-11-03",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW4.4",
+      "due_date": "2025-11-03",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 4.5",
+      "due_date": "2025-11-03",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "[Not Ready] Signup for Final Project In-class Presentation [C S 452]",
+      "due_date": "2025-11-03",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Due: Least Squares\nBegin: Image Segmentation\n",
+      "due_date": "2025-11-04",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Image Segmentation",
+      "due_date": "2025-11-04",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 18: Identifiability Spectrum",
+      "due_date": "2025-11-04",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "[Not Ready] Project Initial Design [C S 452]",
+      "due_date": "2025-11-04",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "[Not Ready] Project Pitch Report [C S 452]",
+      "due_date": "2025-11-04",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Assignment 11 (Data Storage and Indexes) [C S 452]",
+      "due_date": "2025-11-04",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 25: 6.1",
+      "due_date": "2025-11-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 6.2",
+      "due_date": "2025-11-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW4.5",
+      "due_date": "2025-11-05",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 4.6",
+      "due_date": "2025-11-05",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz: Markov Chains",
+      "due_date": "2025-11-06",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Attendance: Markov Chains",
+      "due_date": "2025-11-06",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Reading 8: Choice and Beauty: Chapters 13 and 14",
+      "due_date": "2025-11-06",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 19: Applications of Dynamical Systems",
+      "due_date": "2025-11-06",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 26: 6.2 Written",
+      "due_date": "2025-11-07",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 26: 6.2 Coding",
+      "due_date": "2025-11-07",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 6.3",
+      "due_date": "2025-11-07",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW4.6",
+      "due_date": "2025-11-07",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft Grade due at 5pm: Image Segmentation\n",
+      "due_date": "2025-11-07",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Recitation 10: Dynamic Networks & System Identification",
+      "due_date": "2025-11-07",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 8: RYL 8",
+      "due_date": "2025-11-08",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Assignment 12 (Transaction Management, Concurrency, Recovery) [C S 452]",
+      "due_date": "2025-11-08",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Homework 27: 6.3 Coding",
+      "due_date": "2025-11-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 27: 6.3 Written",
+      "due_date": "2025-11-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 6.5 - 6.5.1",
+      "due_date": "2025-11-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Exam 2",
+      "due_date": "2025-11-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.1",
+      "due_date": "2025-11-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Exam 2",
+      "due_date": "2025-11-11",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Slack Day: No Lab today\n",
+      "due_date": "2025-11-11",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 20: Bifurcations and singular perturbation",
+      "due_date": "2025-11-11",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Reading Assignment: 6.5.2 - 6.5.4",
+      "due_date": "2025-11-12",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.1",
+      "due_date": "2025-11-12",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.2",
+      "due_date": "2025-11-12",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Project Status Report 1 [C S 452]",
+      "due_date": "2025-11-12",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Attendance: SQL 1",
+      "due_date": "2025-11-13",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Quiz: SQL 1",
+      "due_date": "2025-11-13",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Reading 9: Culture: Chapter 15",
+      "due_date": "2025-11-13",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 21: Chaos",
+      "due_date": "2025-11-13",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 28: 6.5",
+      "due_date": "2025-11-14",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: Exam 2 Review",
+      "due_date": "2025-11-14",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.2",
+      "due_date": "2025-11-14",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.3",
+      "due_date": "2025-11-14",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Recitation 11: Bifurcations & Chaos",
+      "due_date": "2025-11-14",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "RYL 9: RYL 9",
+      "due_date": "2025-11-15",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "In Person Live Data Modeling Interview (your project) [C S 452]",
+      "due_date": "2025-11-15",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "In Person System Design Interview (your project) [C S 452]",
+      "due_date": "2025-11-15",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Reading Assignment: 7.1-7.2.1",
+      "due_date": "2025-11-17",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.3",
+      "due_date": "2025-11-17",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.4",
+      "due_date": "2025-11-17",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Project Status Report 2 [C S 452]",
+      "due_date": "2025-11-17",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Begin: SVD and Image CompressionDue: Image Segmentation",
+      "due_date": "2025-11-18",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: SVD and Image Compression",
+      "due_date": "2025-11-18",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 22: Probabilistic Models",
+      "due_date": "2025-11-18",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 29: 7.1-7.2 (all in .ipynb)",
+      "due_date": "2025-11-19",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 7.2.2-7.2.4 and 7.3",
+      "due_date": "2025-11-19",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.4",
+      "due_date": "2025-11-19",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.5",
+      "due_date": "2025-11-19",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Project Status Report 3 [C S 452]",
+      "due_date": "2025-11-19",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Quiz: Sampling",
+      "due_date": "2025-11-20",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Attendance: Sampling",
+      "due_date": "2025-11-20",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Reading 10: Creativity: Chapter 16",
+      "due_date": "2025-11-20",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 23: Emergence and Universality",
+      "due_date": "2025-11-20",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 30: 7.2-7.3 Written",
+      "due_date": "2025-11-21",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 30: 7.2-7.3 Coding",
+      "due_date": "2025-11-21",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 8.2",
+      "due_date": "2025-11-21",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Soft Grade at 5 pm: SVD and Image Compression\n",
+      "due_date": "2025-11-21",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Concentration ",
+      "due_date": "2025-11-22",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "RYL 10: RYL 10",
+      "due_date": "2025-11-22",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 31: 8.2",
+      "due_date": "2025-11-24",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 8.5",
+      "due_date": "2025-11-24",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.5",
+      "due_date": "2025-11-24",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.6",
+      "due_date": "2025-11-24",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Project Status Report 4 [C S 452]",
+      "due_date": "2025-11-24",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Quiz: Discrete Fourier Transform",
+      "due_date": "2025-11-25",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Begin: Fourier Transforms\nDue: SVD and Image Compression\n",
+      "due_date": "2025-11-25",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: The Fourier Transform",
+      "due_date": "2025-11-25",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 31: Circle the Wagons",
+      "due_date": "2025-11-25",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Soft Grade at 5 pm: Fourier Transforms\n",
+      "due_date": "2025-11-28",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Homework 32: 8.5 Coding",
+      "due_date": "2025-12-01",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 32: 8.5 Written",
+      "due_date": "2025-12-01",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 8.6",
+      "due_date": "2025-12-01",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.6",
+      "due_date": "2025-12-01",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.7",
+      "due_date": "2025-12-01",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Project Status Report 5 [C S 452]",
+      "due_date": "2025-12-01",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Begin: Facial Recognition\nDue: Fourier transforms\n",
+      "due_date": "2025-12-02",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Attendance: Facial Recognition",
+      "due_date": "2025-12-02",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Warmup 24: Abstraction",
+      "due_date": "2025-12-02",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 33: 8.6 Written",
+      "due_date": "2025-12-03",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 33: 8.6 Coding",
+      "due_date": "2025-12-03",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 8.7",
+      "due_date": "2025-12-03",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.7",
+      "due_date": "2025-12-03",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.8",
+      "due_date": "2025-12-03",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Homework 33: Presentation Posters",
+      "due_date": "2025-12-03",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Project Status Report 6 [C S 452]",
+      "due_date": "2025-12-03",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Attendance: Convolution and Filtering",
+      "due_date": "2025-12-04",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Quiz: Convolution and Filtering",
+      "due_date": "2025-12-04",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "Warmup 25: Renormalization x (gus likes)",
+      "due_date": "2025-12-04",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 34: 8.7 Written",
+      "due_date": "2025-12-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 34: 8.7 Coding",
+      "due_date": "2025-12-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 8.8",
+      "due_date": "2025-12-05",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.8",
+      "due_date": "2025-12-05",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.9",
+      "due_date": "2025-12-05",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Soft grade due at 5 pm: Facial Recognition\n",
+      "due_date": "2025-12-05",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "RYL 11: RYL 11",
+      "due_date": "2025-12-06",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 35: 8.8 Written",
+      "due_date": "2025-12-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 35: 8.8 Coding",
+      "due_date": "2025-12-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: 8.9",
+      "due_date": "2025-12-08",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "HW5.9",
+      "due_date": "2025-12-08",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Quiz 5.10",
+      "due_date": "2025-12-08",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Project Status Report 7 [C S 452]",
+      "due_date": "2025-12-08",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Due: Facial Recognition\n",
+      "due_date": "2025-12-09",
+      "course": "MATH 345"
+    },
+    {
+      "assignment": "Reading 11: The Beginning: Chapters 17 and 18",
+      "due_date": "2025-12-09",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Warmup 26: Conclusion",
+      "due_date": "2025-12-09",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Homework 36: 8.9 Written",
+      "due_date": "2025-12-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Homework 36: 8.9 Coding",
+      "due_date": "2025-12-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Reading Assignment: Final Exam Review",
+      "due_date": "2025-12-10",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Regrade Request",
+      "due_date": "2025-12-10",
+      "course": "MATH 321"
+    },
+    {
+      "assignment": "HW5.10",
+      "due_date": "2025-12-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Student Feedback Extra Credit",
+      "due_date": "2025-12-10",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Project 1: Project Poster Session",
+      "due_date": "2025-12-10",
+      "course": "CS 580"
+    },
+    {
+      "assignment": "Final Project (Self Evaluation) [C S 452]",
+      "due_date": "2025-12-10",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Final Project (TA and Instructor Graded) [C S 452]",
+      "due_date": "2025-12-10",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Peer Support and Reviews of Other's Final Projects (TA and Instructor Graded) [C S 452]",
+      "due_date": "2025-12-10",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Review Others Final Project Reports (Self Evaluation) [C S 452]",
+      "due_date": "2025-12-10",
+      "course": "CS 452"
+    },
+    {
+      "assignment": "Final Exam",
+      "due_date": "2025-12-13",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Final Exam",
+      "due_date": "2025-12-16",
+      "course": "MATH 320"
+    },
+    {
+      "assignment": "Final Exam:\n104 TMCB\n7:00am - 10:00am\n",
+      "due_date": "2025-12-16",
+      "course": "MATH 344"
+    },
+    {
+      "assignment": "Extra Credit for Typos",
+      "due_date": "2025-12-17",
+      "course": "MATH 321"
+    }
+  ]
+}
