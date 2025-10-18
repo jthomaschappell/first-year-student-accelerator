@@ -1,0 +1,6 @@
+MATH 320 https://learningsuite.byu.edu/iCalFeed/ical.php?courseID=vn6tTfA4Lfuo
+MATH 321 https://learningsuite.byu.edu/iCalFeed/ical.php?courseID=Zn4i5TcEQ0Mx
+MATH 344 https://learningsuite.byu.edu/iCalFeed/ical.php?courseID=ydyev3Bd9pxr
+MATH 345 https://learningsuite.byu.edu/iCalFeed/ical.php?courseID=ie3Kjn3yGDUU
+CS 580 ./20255-phscs580-1.ics
+Canvas (CS 452) https://byu.instructure.com/feeds/calendars/user_ZDuxEQuB6zebYBhn3e7aNa4oipLlCZ83SwHA9TP5.ics 

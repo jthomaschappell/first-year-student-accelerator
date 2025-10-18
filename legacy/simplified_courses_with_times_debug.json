@@ -1,0 +1,2448 @@
+[
+  {
+    "course_name": "A HTG 100",
+    "full_title": "American Heritage.",
+    "curriculum_id": "02859",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "020",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "RB",
+            "room": "204"
+          }
+        ]
+      },
+      {
+        "section_number": "076",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JKB",
+            "room": "3112"
+          }
+        ]
+      },
+      {
+        "section_number": "065",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JKB",
+            "room": "3112"
+          }
+        ]
+      },
+      {
+        "section_number": "063",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JKB",
+            "room": "1013"
+          }
+        ]
+      },
+      {
+        "section_number": "058",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "MCKB",
+            "room": "270"
+          }
+        ]
+      },
+      {
+        "section_number": "059",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "MCKB",
+            "room": "280"
+          }
+        ]
+      },
+      {
+        "section_number": "060",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "MARB",
+            "room": "123"
+          }
+        ]
+      },
+      {
+        "section_number": "030",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "179"
+          }
+        ]
+      },
+      {
+        "section_number": "035",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "178"
+          }
+        ]
+      },
+      {
+        "section_number": "045",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "JFSB",
+            "room": "B132"
+          }
+        ]
+      },
+      {
+        "section_number": "006",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "section_number": "032",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "171"
+          }
+        ]
+      },
+      {
+        "section_number": "078",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "182"
+          }
+        ]
+      },
+      {
+        "section_number": "047",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "BRMB",
+            "room": "250"
+          }
+        ]
+      },
+      {
+        "section_number": "043",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "MARB",
+            "room": "127"
+          }
+        ]
+      },
+      {
+        "section_number": "064",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JKB",
+            "room": "3016"
+          }
+        ]
+      },
+      {
+        "section_number": "062",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JFSB",
+            "room": "B101"
+          }
+        ]
+      },
+      {
+        "section_number": "056",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JKB",
+            "room": "2114"
+          }
+        ]
+      },
+      {
+        "section_number": "002",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "Th",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "004",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "103"
+          }
+        ]
+      },
+      {
+        "section_number": "005",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "106"
+          }
+        ]
+      },
+      {
+        "section_number": "007",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "008",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "103"
+          }
+        ]
+      },
+      {
+        "section_number": "009",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "182"
+          }
+        ]
+      },
+      {
+        "section_number": "013",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "103"
+          }
+        ]
+      },
+      {
+        "section_number": "016",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "021",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "024",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "025",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "8:00 AM",
+            "end_time": "8:50 AM",
+            "building": "JSB",
+            "room": "170"
+          }
+        ]
+      },
+      {
+        "section_number": "033",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "202"
+          }
+        ]
+      },
+      {
+        "section_number": "034",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "179"
+          }
+        ]
+      },
+      {
+        "section_number": "001",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "Th",
+            "start_time": "8:00 AM",
+            "end_time": "8:50 AM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "041",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "170"
+          }
+        ]
+      },
+      {
+        "section_number": "073",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "Th",
+            "start_time": "3:00 PM",
+            "end_time": "3:50 PM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "074",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "103"
+          }
+        ]
+      },
+      {
+        "section_number": "077",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "JSB",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "section_number": "079",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "JSB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "028",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "170"
+          }
+        ]
+      },
+      {
+        "section_number": "050",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "178"
+          }
+        ]
+      },
+      {
+        "section_number": "072",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "Th",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "093",
+        "instructor_name": "Chris Russell",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T",
+            "start_time": "5:15 PM",
+            "end_time": "7:45 PM",
+            "building": "SLC",
+            "room": "403"
+          }
+        ]
+      },
+      {
+        "section_number": "091",
+        "instructor_name": "Joan Shrum",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "Th",
+            "start_time": "11:15 AM",
+            "end_time": "1:45 PM",
+            "building": "SLC",
+            "room": "409"
+          }
+        ]
+      },
+      {
+        "section_number": "092",
+        "instructor_name": "Kurt Fertig",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "Th",
+            "start_time": "5:15 PM",
+            "end_time": "7:45 PM",
+            "building": "SLC",
+            "room": "403"
+          }
+        ]
+      },
+      {
+        "section_number": "036",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "178"
+          }
+        ]
+      },
+      {
+        "section_number": "038",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "170"
+          }
+        ]
+      },
+      {
+        "section_number": "049",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "067",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "178"
+          }
+        ]
+      },
+      {
+        "section_number": "027",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "114"
+          }
+        ]
+      },
+      {
+        "section_number": "054",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "175"
+          }
+        ]
+      },
+      {
+        "section_number": "069",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "178"
+          }
+        ]
+      },
+      {
+        "section_number": "042",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JKB",
+            "room": "1020"
+          }
+        ]
+      },
+      {
+        "section_number": "061",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "3:00 PM",
+            "end_time": "3:50 PM",
+            "building": "JFSB",
+            "room": "B132"
+          }
+        ]
+      },
+      {
+        "section_number": "018",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "section_number": "011",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "203"
+          }
+        ]
+      },
+      {
+        "section_number": "017",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "section_number": "031",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "170"
+          }
+        ]
+      },
+      {
+        "section_number": "022",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "040",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "HRCB",
+            "room": "150"
+          }
+        ]
+      },
+      {
+        "section_number": "075",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "Th",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "MARB",
+            "room": "122"
+          }
+        ]
+      },
+      {
+        "section_number": "044",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JKB",
+            "room": "1020"
+          }
+        ]
+      },
+      {
+        "section_number": "039",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "171"
+          }
+        ]
+      },
+      {
+        "section_number": "068",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "178"
+          }
+        ]
+      },
+      {
+        "section_number": "029",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "171"
+          }
+        ]
+      },
+      {
+        "section_number": "052",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "section_number": "055",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "175"
+          }
+        ]
+      },
+      {
+        "section_number": "053",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "051",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "203"
+          }
+        ]
+      },
+      {
+        "section_number": "037",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "170"
+          }
+        ]
+      },
+      {
+        "section_number": "010",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "Th",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "MARB",
+            "room": "127"
+          }
+        ]
+      },
+      {
+        "section_number": "066",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "175"
+          }
+        ]
+      },
+      {
+        "section_number": "057",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "1:00 PM",
+            "end_time": "1:50 PM",
+            "building": "MCKB",
+            "room": "359"
+          }
+        ]
+      },
+      {
+        "section_number": "012",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "8:00 AM",
+            "end_time": "8:50 AM",
+            "building": "JSB",
+            "room": "106"
+          }
+        ]
+      },
+      {
+        "section_number": "015",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "106"
+          }
+        ]
+      },
+      {
+        "section_number": "026",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JSB",
+            "room": "170"
+          }
+        ]
+      },
+      {
+        "section_number": "023",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "RB",
+            "room": "227"
+          }
+        ]
+      },
+      {
+        "section_number": "048",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "JSB",
+            "room": "175"
+          }
+        ]
+      },
+      {
+        "section_number": "014",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "10:00 AM",
+            "end_time": "10:50 AM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "F",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "106"
+          }
+        ]
+      },
+      {
+        "section_number": "019",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "11:50 AM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "Th",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JKB",
+            "room": "1018"
+          }
+        ]
+      },
+      {
+        "section_number": "071",
+        "instructor_name": "Richard Kimball",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "2:50 PM",
+            "building": "KMBL",
+            "room": "250"
+          },
+          {
+            "days": "Th",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "JKB",
+            "room": "1126"
+          }
+        ]
+      },
+      {
+        "section_number": "046",
+        "instructor_name": "David Sims",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:00 PM",
+            "end_time": "12:50 PM",
+            "building": "JSB",
+            "room": "140"
+          },
+          {
+            "days": "F",
+            "start_time": "9:00 AM",
+            "end_time": "9:50 AM",
+            "building": "BRMB",
+            "room": "250"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 200",
+    "full_title": "Principles of Accounting.",
+    "curriculum_id": "08961",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "004",
+        "instructor_name": "Kyle Scott",
+        "mode": "Blended",
+        "times": [
+          {
+            "days": "Th",
+            "start_time": "5:30 PM",
+            "end_time": "6:45 PM",
+            "building": "TNRB",
+            "room": "W108"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": "Caleb McKay",
+        "mode": "Blended",
+        "times": [
+          {
+            "days": "W",
+            "start_time": "5:30 PM",
+            "end_time": "6:45 PM",
+            "building": "TNRB",
+            "room": "W118"
+          }
+        ]
+      },
+      {
+        "section_number": "001",
+        "instructor_name": "Melissa Larson",
+        "mode": "Blended",
+        "times": [
+          {
+            "days": "Th",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "JSB",
+            "room": "140"
+          }
+        ]
+      },
+      {
+        "section_number": "005",
+        "instructor_name": "Jacob Smith",
+        "mode": "Blended",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "11:15 AM",
+            "end_time": "12:30 PM",
+            "building": "SLC",
+            "room": "308"
+          }
+        ]
+      },
+      {
+        "section_number": "002",
+        "instructor_name": "Michael Drake",
+        "mode": "Blended",
+        "times": [
+          {
+            "days": "Th",
+            "start_time": "3:30 PM",
+            "end_time": "4:45 PM",
+            "building": "JSB",
+            "room": "140"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 241",
+    "full_title": "Business Law in the Environment.",
+    "curriculum_id": "08966",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "001",
+        "instructor_name": "Morgan Cummings",
+        "mode": "Live Remote Delivery",
+        "times": [
+          {
+            "days": "W",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": null,
+            "room": "TBA"
+          }
+        ]
+      },
+      {
+        "section_number": "002",
+        "instructor_name": "Morgan Cummings",
+        "mode": "Blended",
+        "times": [
+          {
+            "days": "Th",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "151"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 310",
+    "full_title": "Principles of Accounting 2.",
+    "curriculum_id": "00015",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "008",
+        "instructor_name": "Brittley Eldredge",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "230"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": "Melissa Western",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "280"
+          }
+        ]
+      },
+      {
+        "section_number": "002",
+        "instructor_name": "Abigail Allen",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "251"
+          }
+        ]
+      },
+      {
+        "section_number": "007",
+        "instructor_name": "Brittley Eldredge",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "230"
+          }
+        ]
+      },
+      {
+        "section_number": "004",
+        "instructor_name": "Melissa Western",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "5:00 PM",
+            "end_time": "6:15 PM",
+            "building": "TNRB",
+            "room": "220"
+          }
+        ]
+      },
+      {
+        "section_number": "010",
+        "instructor_name": "Aaron Jacob",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "12:30 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "220"
+          }
+        ]
+      },
+      {
+        "section_number": "001",
+        "instructor_name": "Aaron Jacob",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "9:30 AM",
+            "end_time": "12:20 PM",
+            "building": "TNRB",
+            "room": "220"
+          }
+        ]
+      },
+      {
+        "section_number": "011",
+        "instructor_name": "Alan Moose",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "5:30 PM",
+            "end_time": "6:45 PM",
+            "building": "TNRB",
+            "room": "W208"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 402",
+    "full_title": "Cost and Managerial Accounting",
+    "curriculum_id": "10314",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "002",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "001",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "006",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "005",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "004",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 405",
+    "full_title": "Fundamentals of Taxation.\t",
+    "curriculum_id": "10317",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "001",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "006",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "002",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "005",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "004",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 407",
+    "full_title": "Data Analytics in Accounting.",
+    "curriculum_id": "13938",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "005",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "004",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "006",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "002",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "001",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 409",
+    "full_title": "Integrated Topics in Accounting",
+    "curriculum_id": "13940",
+    "credit_hours": "1.5",
+    "sections": [
+      {
+        "section_number": "001",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "005",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "006",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "002",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "004",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "T Th",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 411",
+    "full_title": "Accounting Professional Development II",
+    "curriculum_id": "14553",
+    "credit_hours": "1.5",
+    "sections": [
+      {
+        "section_number": "002",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "120"
+          },
+          {
+            "days": "F",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "003",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "130"
+          },
+          {
+            "days": "F",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "005",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "120"
+          },
+          {
+            "days": "F",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "120"
+          }
+        ]
+      },
+      {
+        "section_number": "006",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "130"
+          },
+          {
+            "days": "F",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "130"
+          }
+        ]
+      },
+      {
+        "section_number": "001",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "8:00 AM",
+            "end_time": "9:15 AM",
+            "building": "TNRB",
+            "room": "110"
+          },
+          {
+            "days": "F",
+            "start_time": "9:30 AM",
+            "end_time": "10:45 AM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      },
+      {
+        "section_number": "004",
+        "instructor_name": null,
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "F",
+            "start_time": "12:30 PM",
+            "end_time": "1:45 PM",
+            "building": "TNRB",
+            "room": "110"
+          },
+          {
+            "days": "F",
+            "start_time": "2:00 PM",
+            "end_time": "3:15 PM",
+            "building": "TNRB",
+            "room": "110"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_name": "ACC 440",
+    "full_title": "Corporate Financial Reporting.",
+    "curriculum_id": "10145",
+    "credit_hours": "3",
+    "sections": [
+      {
+        "section_number": "001",
+        "instructor_name": "Travis Dyer",
+        "mode": "Classroom",
+        "times": [
+          {
+            "days": "M W",
+            "start_time": "11:00 AM",
+            "end_time": "12:15 PM",
+            "building": "TNRB",
+            "room": "284"
+          }
+        ]
+      }
+    ]
+  }
+]
