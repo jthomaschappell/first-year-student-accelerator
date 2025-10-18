@@ -69,23 +69,24 @@ function UpcomingDeadlinesPanel({ maxItems = 20 }) {
               <div className="flex-1">
                 <div className="text-slate-100">{deadline.title}</div>
                 <div className="text-xs text-slate-100">
+                  {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-slate-100 text-sm font-medium">
                   {deadline.date &&
                     new Date(deadline.date + 'T00:00:00').toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
                     })}
                 </div>
+                <div className="text-xs text-slate-100">
+                  {deadline.date &&
+                    new Date(deadline.date + 'T00:00:00').toLocaleDateString('en-US', {
+                      weekday: 'short'
+                    })}
+                </div>
               </div>
-              <Badge 
-                variant="outline" 
-                className="border-slate-600 text-slate-300"
-                style={{
-                  borderColor: deadline.color,
-                  color: deadline.color
-                }}
-              >
-                {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
-              </Badge>
             </div>
           ))}
         </div>
