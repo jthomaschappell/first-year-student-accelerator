@@ -21,9 +21,10 @@ interface CalendarEvent {
 
 interface CalendarViewProps {
   events: CalendarEvent[];
+  addEvent?: (event: CalendarEvent) => void;
 }
 
-export function CalendarView({ events }: CalendarViewProps) {
+export function CalendarView({ events, addEvent }: CalendarViewProps) {
   const [view, setView] = useState<'daily' | 'weekly'>('weekly');
   const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 18)); // Oct 18, 2025
 
@@ -75,8 +76,38 @@ export function CalendarView({ events }: CalendarViewProps) {
   };
 
   const getWeekEvents = (day: string) => {
+    // Calculate the current week's date range
+    const weekStart = new Date(currentDate);
+    weekStart.setDate(currentDate.getDate() - (currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1));
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+    
     return events.filter(event => {
-      // Handle both full day names and abbreviations
+      // First check if event has a specific date and if it matches the current week
+      if (event.date) {
+        // Parse date as local date to avoid timezone issues
+        const [year, month, dayNum] = event.date.split('-').map(Number);
+        const eventDate = new Date(year, month - 1, dayNum);
+        const eventDayName = weekDays[eventDate.getDay() === 0 ? 6 : eventDate.getDay() - 1];
+        
+        // Debug logging
+        if (event.title === 'Great Expectations') {
+          console.log('Event date parsing:', {
+            originalDate: event.date,
+            parsedDate: eventDate,
+            dayOfWeek: eventDate.getDay(),
+            eventDayName,
+            targetDay: day,
+            matches: eventDayName === day
+          });
+        }
+        
+        // Check if the event date is within the current week
+        const isInCurrentWeek = eventDate >= weekStart && eventDate <= weekEnd;
+        return eventDayName === day && isInCurrentWeek;
+      }
+      
+      // Fallback to day-based filtering for recurring events
       const eventDay = event.day;
       if (!eventDay) return false;
       
@@ -154,9 +185,9 @@ export function CalendarView({ events }: CalendarViewProps) {
       {/* Calendar Grid */}
       <div className="flex-1 overflow-auto">
         {view === 'weekly' ? (
-          <div className="grid grid-cols-6 gap-2 min-w-[800px]">
+          <div className="flex min-w-[1200px] overflow-x-auto">
             {/* Time Column */}
-            <div className="col-span-1">
+            <div className="w-16 flex-shrink-0">
               <div className="h-12 border-b border-slate-700/50"></div>
               {hours.map(hour => (
                 <div key={hour} className="h-20 border-b border-slate-700/50 flex items-start justify-end pr-2 text-slate-500">
@@ -166,8 +197,8 @@ export function CalendarView({ events }: CalendarViewProps) {
             </div>
 
             {/* Day Columns */}
-            {weekDays.slice(0, 5).map(day => (
-              <div key={day} className="relative">
+            {weekDays.map(day => (
+              <div key={day} className="flex-1 min-w-[150px] relative">
                 <div className="h-12 border-b border-l border-slate-700/50 flex items-center justify-center">
                   <span className="text-slate-300">{day.slice(0, 3)}</span>
                 </div>
@@ -204,7 +235,7 @@ export function CalendarView({ events }: CalendarViewProps) {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-6 gap-2">
+          <div className="grid grid-cols-6 gap-2 min-w-[800px]">
             {/* Time Column */}
             <div className="col-span-1">
               {hours.map(hour => (

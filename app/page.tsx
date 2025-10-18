@@ -1,11 +1,31 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/components/ui/tabs';
 import { Card } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
 import { CalendarView } from '@/app/components/CalendarView';
 import { AIAdvisorPanel } from '@/app/components/AIAdvisorPanel';
+
+interface AIMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
+
+interface CalendarEvent {
+  id: string;
+  title: string;
+  startTime: string;
+  endTime: string;
+  location?: string;
+  color: string;
+  type: 'class' | 'event' | 'deadline';
+  day?: string;
+  date?: string;
+}
+
 import { CoursePlanningTab } from '@/app/components/CoursePlanningTab';
 import { CampusEventsWidget } from '@/app/components/CampusEventsWidget';
 import { Calendar, BookOpen, GraduationCap } from 'lucide-react';
@@ -76,21 +96,86 @@ function UpcomingDeadlinesPanel({ maxItems = 20 }) {
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const calendarEvents = getAllCalendarEvents();
+  const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
+  
+  // AI Advisor state
+  const [messages, setMessages] = useState<AIMessage[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Initialize calendar events on mount
+  useEffect(() => {
+    setCalendarEvents(getAllCalendarEvents());
+  }, []);
+
+  // Load saved messages from localStorage on mount
+  useEffect(() => {
+    // Clear any corrupted localStorage data first
+    try {
+      const savedMessages = localStorage.getItem('ai-chat-messages');
+      if (savedMessages) {
+        const parsedMessages = JSON.parse(savedMessages);
+        // Convert timestamp strings back to Date objects
+        const messagesWithDates = parsedMessages.map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        }));
+        setMessages(messagesWithDates);
+      }
+    } catch (error) {
+      console.error('Failed to load saved messages, clearing localStorage:', error);
+      // Clear all localStorage to fix corruption
+      localStorage.clear();
+    }
+  }, []);
+
+  // Save messages to localStorage whenever messages change (limit to last 50 messages)
+  useEffect(() => {
+    if (messages.length > 0) {
+      try {
+        const messagesToSave = messages.slice(-50); // Keep only last 50 messages
+        localStorage.setItem('ai-chat-messages', JSON.stringify(messagesToSave));
+      } catch (error) {
+        console.error('Failed to save messages to localStorage:', error);
+        // Clear localStorage if it's full
+        localStorage.removeItem('ai-chat-messages');
+      }
+    }
+  }, [messages]);
+
+  // Add event to calendar
+  const addEvent = useCallback((event: CalendarEvent) => {
+    setCalendarEvents(prev => [...prev, event]);
+  }, []);
+
+  // Clear localStorage function for debugging
+  const clearLocalStorage = () => {
+    localStorage.clear();
+    setMessages([]);
+    console.log('localStorage cleared');
+  };
 
   return (
     <div className="min-h-screen p-4 md:p-6 lg:p-8">
       <div className="max-w-[1800px] mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-slate-900/90 backdrop-blur-sm rounded-lg border border-slate-700/50">
-              <GraduationCap className="w-6 h-6 text-indigo-400" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 bg-slate-900/90 backdrop-blur-sm rounded-lg border border-slate-700/50">
+                <GraduationCap className="w-6 h-6 text-indigo-400" />
+              </div>
+              <div>
+                <h1 className="text-white">First Year Student Accelerator</h1>
+                <p className="text-slate-300">Your unified academic productivity hub</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-white">First Year Student Accelerator</h1>
-              <p className="text-slate-300">Your unified academic productivity hub</p>
-            </div>
+            <button 
+              onClick={clearLocalStorage}
+              className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700"
+            >
+              Clear Storage
+            </button>
           </div>
         </div>
 
@@ -113,7 +198,7 @@ export default function HomePage() {
               {/* Left: Calendar View - 50% width */}
               <div className="col-span-1">
                 <Card className="p-6 h-[900px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl">
-                  <CalendarView events={calendarEvents} />
+                  <CalendarView events={calendarEvents} addEvent={addEvent} />
                 </Card>
               </div>
 
@@ -130,7 +215,15 @@ export default function HomePage() {
                   {/* AI Panel */}
                   <div className="col-span-1">
                     <Card className="h-[800px] bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl p-6 flex flex-col overflow-hidden">
-                      <AIAdvisorPanel />
+                      <AIAdvisorPanel 
+                        messages={messages}
+                        setMessages={setMessages}
+                        input={input}
+                        setInput={setInput}
+                        isLoading={isLoading}
+                        setIsLoading={setIsLoading}
+                        addEvent={addEvent}
+                      />
                     </Card>
                   </div>
                 </div>

@@ -14,17 +14,37 @@ interface AIMessage {
   timestamp: Date;
 }
 
-export function AIAdvisorPanel() {
-  const [messages, setMessages] = useState<AIMessage[]>([
-    {
-      id: '1',
-      role: 'assistant',
-      content: "Hi! I'm your BYU AI advisor. Ask me about campus events, courses, professor ratings, or your assignments!",
-      timestamp: new Date()
-    }
-  ]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+interface CalendarEvent {
+  id: string;
+  title: string;
+  startTime: string;
+  endTime: string;
+  location?: string;
+  color: string;
+  type: 'class' | 'event' | 'deadline';
+  day?: string;
+  date?: string;
+}
+
+interface AIAdvisorPanelProps {
+  messages: AIMessage[];
+  setMessages: React.Dispatch<React.SetStateAction<AIMessage[]>>;
+  input: string;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  addEvent: (event: CalendarEvent) => void;
+}
+
+export function AIAdvisorPanel({ 
+  messages, 
+  setMessages, 
+  input, 
+  setInput, 
+  isLoading, 
+  setIsLoading,
+  addEvent
+}: AIAdvisorPanelProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom when messages change
@@ -44,54 +64,57 @@ export function AIAdvisorPanel() {
         const eventDate = button.getAttribute('data-event-date');
         const eventTime = button.getAttribute('data-event-time');
         const eventLocation = button.getAttribute('data-event-location');
-        const eventDescription = button.getAttribute('data-event-description');
         
-        // Create a message to add the event to calendar
-        const message = `Add "${eventTitle}" to my calendar on ${eventDate} at ${eventTime}. Location: ${eventLocation}. Description: ${eventDescription}`;
-        
-        // Create user message
-        const userMessage: AIMessage = {
-          id: Date.now().toString(),
-          role: 'user',
-          content: message,
-          timestamp: new Date()
-        };
-  
-        setMessages(prev => [...prev, userMessage]);
-        setIsLoading(true);
-  
-        try {
-          const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-              messages: [...messages, userMessage].map(m => ({
-                role: m.role,
-                content: m.content
-              }))
-            })
-          });
-  
-          const data = await response.json();
-          const aiMessage: AIMessage = {
+        if (eventTitle && eventDate && eventTime) {
+          // Parse time to create start and end times
+          let startTime = '14:00'; // Default to 2 PM
+          let endTime = '16:00';   // Default to 4 PM
+          
+          try {
+            const [time, period] = eventTime.split(' ');
+            const [hours, minutes] = time.split(':');
+            let hour24 = parseInt(hours);
+            if (period === 'PM' && hour24 !== 12) hour24 += 12;
+            if (period === 'AM' && hour24 === 12) hour24 = 0;
+            
+            startTime = `${hour24.toString().padStart(2, '0')}:${minutes}`;
+            endTime = `${(hour24 + 2).toString().padStart(2, '0')}:${minutes}`; // Default 2-hour duration
+          } catch (error) {
+            console.error('Error parsing time:', error);
+            // Use default times if parsing fails
+          }
+          
+          // Create calendar event
+          const calendarEvent: CalendarEvent = {
+            id: `event-${Date.now()}`,
+            title: eventTitle,
+            startTime: startTime,
+            endTime: endTime,
+            location: eventLocation || undefined,
+            color: '#EC4899', // Pink color for campus events
+            type: 'event',
+            date: eventDate
+          };
+          
+          // Add to calendar
+          addEvent(calendarEvent);
+          
+          // Show success message in chat
+          const successMessage: AIMessage = {
             id: Date.now().toString(),
             role: 'assistant',
-            content: data.message.content,
+            content: 'Added to calendar',
             timestamp: new Date()
           };
           
-          setMessages(prev => [...prev, aiMessage]);
-        } catch (error) {
-          console.error('Chat error:', error);
-        } finally {
-          setIsLoading(false);
+          setMessages(prev => [...prev, successMessage]);
         }
       }
     };
   
     document.addEventListener('click', handleCalendarClick);
     return () => document.removeEventListener('click', handleCalendarClick);
-  }, [messages]);
+  }, [addEvent, setMessages]);
 
   const parseMessageContent = (content: string) => {
     // Check for both event and professor artifacts
