@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import { Input } from '@/app/components/ui/input';
@@ -25,6 +25,67 @@ export function AIAdvisorPanel() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  // Add event listeners for calendar buttons after messages update
+  useEffect(() => {
+    const handleCalendarClick = async (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const button = target.closest('.add-to-calendar-btn') as HTMLElement;
+      
+      if (button) {
+        e.preventDefault();
+        const eventTitle = button.getAttribute('data-event-title');
+        const eventDate = button.getAttribute('data-event-date');
+        const eventTime = button.getAttribute('data-event-time');
+        const eventLocation = button.getAttribute('data-event-location');
+        const eventDescription = button.getAttribute('data-event-description');
+        
+        // Create a message to add the event to calendar
+        const message = `Add "${eventTitle}" to my calendar on ${eventDate} at ${eventTime}. Location: ${eventLocation}. Description: ${eventDescription}`;
+        
+        // Create user message
+        const userMessage: AIMessage = {
+          id: Date.now().toString(),
+          role: 'user',
+          content: message,
+          timestamp: new Date()
+        };
+
+        setMessages(prev => [...prev, userMessage]);
+        setIsLoading(true);
+
+        try {
+          const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              messages: [...messages, userMessage].map(m => ({
+                role: m.role,
+                content: m.content
+              }))
+            })
+          });
+
+          const data = await response.json();
+          const aiMessage: AIMessage = {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: data.message.content,
+            timestamp: new Date()
+          };
+          
+          setMessages(prev => [...prev, aiMessage]);
+        } catch (error) {
+          console.error('Chat error:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleCalendarClick);
+    return () => document.removeEventListener('click', handleCalendarClick);
+  }, [messages]);
 
   const parseMessageContent = (content: string) => {
     // First check if this is a pre-formatted event artifact

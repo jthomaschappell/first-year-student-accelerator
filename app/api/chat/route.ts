@@ -297,6 +297,10 @@ IMPORTANT: When displaying event information from the query_events tool, format 
       <span style="background: rgba(37, 99, 235, 0.2); color: #93C5FD; padding: 4px 12px; border-radius: 9999px; font-size: 14px;">[EVENT CATEGORY]</span>
     </div>
   </div>
+  <button class="add-to-calendar-btn" data-event-title="[EVENT TITLE]" data-event-date="[EVENT DATE]" data-event-time="[EVENT TIME]" data-event-location="[EVENT LOCATION]" data-event-description="[EVENT DESCRIPTION]" style="margin-top: 16px; width: 100%; background: white; color: #1F2937; padding: 12px 24px; border-radius: 8px; border: none; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); display: flex; align-items: center; justify-content: center; gap: 8px;" onmouseover="this.style.background='#f3f4f6'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.2)';" onmouseout="this.style.background='white'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.15)';">
+    <span style="font-size: 18px;">📅</span>
+    <span>Add to Calendar</span>
+  </button>
 </div>
 
 CRITICAL RULES:
@@ -304,7 +308,8 @@ CRITICAL RULES:
 2. The title goes in the blue header div at the top of each artifact
 3. Do NOT list event titles separately outside the artifacts
 4. Each event should be its own complete self-contained artifact
-5. Add friendly intro/outro text outside the artifacts, but never duplicate event titles outside`
+5. Add friendly intro/outro text outside the artifacts, but never duplicate event titles outside
+6. Include the "Add to Calendar" button at the bottom of each artifact with all event data in data attributes`
     };
 
     const messagesWithSystem = [systemMessage, ...messages];
