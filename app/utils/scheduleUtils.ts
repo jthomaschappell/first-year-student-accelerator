@@ -104,7 +104,8 @@ export function getUpcomingDeadlines(limit = 5, currentDate = new Date()): Calen
 }
 
 export function getRelativeTimeDisplay(dueDate: string, currentDate = new Date()): string {
-  const due = new Date(dueDate);
+  // Parse dates as local dates to avoid timezone issues
+  const due = new Date(dueDate + 'T00:00:00');
   const current = new Date(currentDate);
   
   // Set time to start of day for accurate day comparison
