@@ -140,7 +140,7 @@ export function CoursePlanningTab() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="h-full flex flex-col overflow-hidden">
       {/* Header - Fixed */}
       <div className="flex items-center gap-3 mb-6 flex-shrink-0">
         <BookOpen className="w-5 h-5 text-indigo-400" />
@@ -162,11 +162,10 @@ export function CoursePlanningTab() {
       </div>
 
       {/* Main Content - Scrollable */}
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
         {/* Course List - Left Column */}
-        <div className="flex flex-col min-h-0">
-          <ScrollArea className="flex-1">
-            <div className="space-y-1.5 pr-4">
+        <ScrollArea className="flex-1 overflow-auto h-full">
+          <div className="space-y-1.5 pr-4">
               {!searchQuery.trim() ? (
                 <div className="h-full flex items-center justify-center py-16">
                   <div className="text-center text-slate-400">
@@ -218,14 +217,12 @@ export function CoursePlanningTab() {
                   </Card>
                 ))
               )}
-            </div>
-          </ScrollArea>
-        </div>
+          </div>
+        </ScrollArea>
 
         {/* Course Details - Right Column */}
-        <div className="flex flex-col min-h-0">
-          <ScrollArea className="flex-1">
-            {selectedCourse ? (
+        <ScrollArea className="flex-1 overflow-auto h-full">
+          {selectedCourse ? (
               <div className="space-y-4 pr-4">
                 {/* Professor Ratings Section */}
                 {getUniqueProfessors(selectedCourse).length > 0 && (
@@ -411,8 +408,7 @@ export function CoursePlanningTab() {
                 </div>
               </div>
             )}
-          </ScrollArea>
-        </div>
+        </ScrollArea>
       </div>
     </div>
   );
