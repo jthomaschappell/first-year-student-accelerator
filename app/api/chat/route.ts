@@ -49,7 +49,7 @@ const tools = [
     type: "function" as const,
     function: {
       name: "get_teacher_ratings",
-      description: "Get ratings for BYU teachers by teacher name. Always requires a specific teacher name - cannot query by department.",
+      description: "Get ratings for BYU teachers with detailed student reviews, comments, tags, and grades. Always requires a specific teacher name - cannot query by department.",
       parameters: {
         type: "object",
         properties: {
@@ -150,8 +150,10 @@ async function callTool(name: string, args: any) {
     }
     
     case "get_teacher_ratings": {
-      const dataPath = join(process.cwd(), "data", "teacher_ratings.json");
-      const data = JSON.parse(readFileSync(dataPath, "utf-8"));
+      const ratingsPath = join(process.cwd(), "data", "teacher_ratings.json");
+      const reviewsPath = join(process.cwd(), "data", "professor_reviews.json");
+      const ratingsData = JSON.parse(readFileSync(ratingsPath, "utf-8"));
+      const reviewsData = JSON.parse(readFileSync(reviewsPath, "utf-8"));
       
       if (!args.teacher_name) {
         return {
@@ -161,12 +163,49 @@ async function callTool(name: string, args: any) {
       }
       
       const searchTerms = args.teacher_name.toLowerCase().split(/\s+/);
-      const filtered = data.filter((t: any) => {
+      const filtered = ratingsData.filter((t: any) => {
         const fullName = `${t.firstName} ${t.lastName}`.toLowerCase();
         return searchTerms.every((term: string) => fullName.includes(term));
       });
       
-      return filtered;
+      // Merge review data with ratings
+      const enriched = filtered.map((teacher: any) => {
+        const review = reviewsData.find((r: any) => {
+          const prof = r.data.node;
+          return prof.firstName.toLowerCase() === teacher.firstName.toLowerCase() &&
+                 prof.lastName.toLowerCase() === teacher.lastName.toLowerCase();
+        });
+        
+        if (review) {
+          const prof = review.data.node;
+          return {
+            ...teacher,
+            aggregatedTags: prof.teacherRatingTags?.map((tag: any) => ({
+              tagName: tag.tagName,
+              tagCount: tag.tagCount,
+            })) || [],
+            reviews: prof.ratings?.edges?.slice(0, 10).map((edge: any) => {
+              const r = edge.node;
+              return {
+                class: r.class,
+                comment: r.comment,
+                grade: r.grade,
+                date: r.date,
+                clarityRating: r.clarityRating,
+                helpfulRating: r.helpfulRating,
+                difficultyRating: r.difficultyRating,
+                wouldTakeAgain: r.wouldTakeAgain,
+                tags: r.ratingTags ? r.ratingTags.split("--").filter((t: string) => t.trim()) : [],
+                attendanceMandatory: r.attendanceMandatory,
+              };
+            }) || [],
+          };
+        }
+        
+        return { ...teacher, aggregatedTags: [], reviews: [] };
+      });
+      
+      return enriched;
     }
     
     case "get_assignments": {
@@ -344,7 +383,7 @@ The tool returns JSON with these fields for each professor:
 
 Format each professor as an artifact using this structure and ONLY the data from the tool result:
 
-<div class="professor-artifact" style="background: linear-gradient(to bottom right, #1F2937, #111827); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(75, 85, 99, 0.3); backdrop-filter: blur(8px);">
+<div class="professor-artifact" style="background: linear-gradient(to bottom right, #1F2937, #111827); border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(75, 85, 99, 0.3); backdrop-filter: blur(8px); max-height: 600px; overflow-y: auto;">
   <div style="background: linear-gradient(to right, #2563EB, #1D4ED8); color: white; padding: 16px; border-radius: 12px 12px 0 0; margin: -20px -20px 16px -20px; font-weight: 600; font-size: 18px; letter-spacing: 0.025em; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);">
     {firstName} {lastName}
   </div>
@@ -400,11 +439,43 @@ Format each professor as an artifact using this structure and ONLY the data from
       </div>
     </div>
   </div>
+  
+  <!-- Student Reviews Section -->
+  <div style="margin-top: 20px; border-top: 1px solid #374151; padding-top: 16px;">
+    <div style="color: #60A5FA; font-weight: 600; font-size: 15px; margin-bottom: 12px;">Student Reviews</div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      {FOR EACH review IN reviews array:}
+      <div style="background: #374151; border-radius: 8px; padding: 12px; border: 1px solid #4B5563;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="background: #1F2937; color: #93C5FD; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">{review.class || 'N/A'}</span>
+            {IF review.grade exists:}
+            <span style="background: #065F46; color: #6EE7B7; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">Grade: {review.grade}</span>
+            {END IF}
+          </div>
+        </div>
+        {IF review.tags exists and has items:}
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+          {FOR EACH tag IN review.tags:}
+          <span style="background: rgba(37, 99, 235, 0.2); color: #93C5FD; padding: 3px 8px; border-radius: 9999px; font-size: 11px;">{tag}</span>
+          {END FOR}
+        </div>
+        {END IF}
+        <p style="color: #D1D5DB; font-size: 12px; line-height: 1.5; margin: 0;">{review.comment}</p>
+      </div>
+      {END FOR}
+    </div>
+  </div>
 </div>
 
 CRITICAL RULES FOR PROFESSORS:
 1. USE ONLY THE EXACT DATA FROM THE TOOL RESULT - DO NOT MAKE UP VALUES
-2. For star display - ALWAYS show EXACTLY 5 star symbols total. Round avgRating to nearest 0.5:
+2. The tool now returns a "reviews" array with student comments. ALWAYS include the Student Reviews section if reviews exist. Loop through each review and display:
+   - Course code (review.class)
+   - Grade if exists (review.grade)
+   - Tags from review.tags array
+   - Comment text (review.comment)
+3. For star display - ALWAYS show EXACTLY 5 star symbols total. Round avgRating to nearest 0.5:
    - ★ = full star (yellow: #FCD34D)
    - ⯨ = half star (yellow: #FCD34D)  
    - ☆ = empty star (gray: #4B5563)
@@ -425,14 +496,15 @@ CRITICAL RULES FOR PROFESSORS:
    - 4.7 → rounds to 4.5 → <span style="color: #FCD34D;">★★★★⯨</span> (4 full + 1 half = 5 total)
    - 1.9 → rounds to 2.0 → <span style="color: #FCD34D;">★★</span><span style="color: #4B5563;">☆☆☆</span> (2 full + 3 empty = 5 total)
 
-3. Difficulty bar width = (avgDifficulty / 5.0) * 100
-4. Would not percentage = 100 - wouldTakeAgainPercent
-5. Never query by department only - always require specific professor names
-6. ALL professor info must be inside the professor-artifact div
-7. NEVER hallucinate or change the data - use EXACT values from the JSON
-8. PROACTIVELY look up ANY professor name mentioned - this provides crucial context for students
+4. Difficulty bar width = (avgDifficulty / 5.0) * 100
+5. Would not percentage = 100 - wouldTakeAgainPercent
+6. Never query by department only - always require specific professor names
+7. ALL professor info must be inside the professor-artifact div
+8. NEVER hallucinate or change the data - use EXACT values from the JSON
+9. PROACTIVELY look up ANY professor name mentioned - this provides crucial context for students
+10. ALWAYS include the Student Reviews section at the bottom - it shows real comments from students
 
-9. ABSOLUTELY CRITICAL - NO DUPLICATE INFORMATION: 
+11. ABSOLUTELY CRITICAL - NO DUPLICATE INFORMATION: 
    DO NOT write summaries, lists, or any text that repeats data from the artifacts.
    DO NOT mention: ratings numbers, difficulty numbers, "would take again" percentages, department names
    
@@ -446,7 +518,29 @@ CRITICAL RULES FOR PROFESSORS:
    
    The artifacts are beautiful and complete - they don't need explanation. Just show them.
 
-EXAMPLE: If tool returns {"firstName": "Albert", "lastName": "Tay", "department": "Information Technology", "avgRating": 1.9, "avgDifficulty": 3.4, "numRatings": 17, "wouldTakeAgainPercent": 29.4118}
+EXAMPLE: If tool returns {
+  "firstName": "Albert", 
+  "lastName": "Tay", 
+  "department": "Information Technology", 
+  "avgRating": 1.9, 
+  "avgDifficulty": 3.4, 
+  "numRatings": 17, 
+  "wouldTakeAgainPercent": 29.4118,
+  "reviews": [
+    {
+      "class": "IT 101",
+      "comment": "Very tough class but learned a lot. Attendance is required.",
+      "grade": "B+",
+      "tags": ["Tough grader", "Skip class? You won't pass."]
+    },
+    {
+      "class": "IT 202", 
+      "comment": "Great insights but too much homework.",
+      "grade": "A",
+      "tags": ["Lots of homework", "Caring"]
+    }
+  ]
+}
 
 Display as:
 - Name: Albert Tay (NOT Physics, NOT 4.5 rating, NOT 65 ratings)
@@ -454,7 +548,43 @@ Display as:
 - Rating: 1.9 / 5.0 with <span style="color: #FCD34D;">★★</span><span style="color: #4B5563;">☆☆☆</span> (exactly 5 stars)
 - Based on 17 ratings
 - Difficulty: 3.4 / 5.0 with bar at 68%
-- Would Take Again: 29.4118% (Would not: 70.5882%)`
+- Would Take Again: 29.4118% (Would not: 70.5882%)
+- Student Reviews section with scrollable review boxes showing each comment with course, grade, and tags
+
+NOTE: The entire professor artifact is scrollable (overflow-y: auto on the main div), so users can scroll through stats and reviews naturally together.
+
+ACTUAL HTML FOR REVIEWS SECTION (replace pseudocode with this):
+  <div style="margin-top: 20px; border-top: 1px solid #374151; padding-top: 16px;">
+    <div style="color: #60A5FA; font-weight: 600; font-size: 15px; margin-bottom: 12px;">Student Reviews</div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="background: #374151; border-radius: 8px; padding: 12px; border: 1px solid #4B5563;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="background: #1F2937; color: #93C5FD; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">IT 101</span>
+            <span style="background: #065F46; color: #6EE7B7; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">Grade: B+</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+          <span style="background: rgba(37, 99, 235, 0.2); color: #93C5FD; padding: 3px 8px; border-radius: 9999px; font-size: 11px;">Tough grader</span>
+          <span style="background: rgba(37, 99, 235, 0.2); color: #93C5FD; padding: 3px 8px; border-radius: 9999px; font-size: 11px;">Skip class? You won't pass.</span>
+        </div>
+        <p style="color: #D1D5DB; font-size: 12px; line-height: 1.5; margin: 0;">Very tough class but learned a lot. Attendance is required.</p>
+      </div>
+      <div style="background: #374151; border-radius: 8px; padding: 12px; border: 1px solid #4B5563;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="background: #1F2937; color: #93C5FD; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">IT 202</span>
+            <span style="background: #065F46; color: #6EE7B7; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">Grade: A</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+          <span style="background: rgba(37, 99, 235, 0.2); color: #93C5FD; padding: 3px 8px; border-radius: 9999px; font-size: 11px;">Lots of homework</span>
+          <span style="background: rgba(37, 99, 235, 0.2); color: #93C5FD; padding: 3px 8px; border-radius: 9999px; font-size: 11px;">Caring</span>
+        </div>
+        <p style="color: #D1D5DB; font-size: 12px; line-height: 1.5; margin: 0;">Great insights but too much homework.</p>
+      </div>
+    </div>
+  </div>`
     };
 
     const messagesWithSystem = [systemMessage, ...messages];

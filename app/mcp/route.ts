@@ -83,24 +83,64 @@ const handler = createMcpHandler(
     // get_teacher_ratings(teacher_name?: string)
     server.tool(
       "get_teacher_ratings",
-      "Get ratings for BYU teachers. Optionally filter by teacher name (first or last).",
+      "Get ratings for BYU teachers with detailed reviews, comments, tags, and grades. Optionally filter by teacher name (first or last).",
       {
         teacher_name: z.string().optional(),
       },
       async (args: { teacher_name?: string }) => {
-        const dataPath = join(process.cwd(), "data", "teacher_ratings.json");
-        const data = JSON.parse(readFileSync(dataPath, "utf-8"));
+        const ratingsPath = join(process.cwd(), "data", "teacher_ratings.json");
+        const reviewsPath = join(process.cwd(), "data", "professor_reviews.json");
+        const ratingsData = JSON.parse(readFileSync(ratingsPath, "utf-8"));
+        const reviewsData = JSON.parse(readFileSync(reviewsPath, "utf-8"));
+        
+        let filtered = ratingsData;
         
         if (args.teacher_name) {
           const search = args.teacher_name.toLowerCase();
-          const filtered = data.filter((t: any) => 
+          filtered = filtered.filter((t: any) => 
             t.firstName.toLowerCase().includes(search) || 
             t.lastName.toLowerCase().includes(search)
           );
-          return { content: [{ type: "json", json: filtered }] };
         }
         
-        return { content: [{ type: "json", json: data }] };
+        // Merge review data with ratings
+        const enriched = filtered.map((teacher: any) => {
+          const review = reviewsData.find((r: any) => {
+            const prof = r.data.node;
+            return prof.firstName.toLowerCase() === teacher.firstName.toLowerCase() &&
+                   prof.lastName.toLowerCase() === teacher.lastName.toLowerCase();
+          });
+          
+          if (review) {
+            const prof = review.data.node;
+            return {
+              ...teacher,
+              aggregatedTags: prof.teacherRatingTags?.map((tag: any) => ({
+                tagName: tag.tagName,
+                tagCount: tag.tagCount,
+              })) || [],
+              reviews: prof.ratings?.edges?.slice(0, 10).map((edge: any) => {
+                const r = edge.node;
+                return {
+                  class: r.class,
+                  comment: r.comment,
+                  grade: r.grade,
+                  date: r.date,
+                  clarityRating: r.clarityRating,
+                  helpfulRating: r.helpfulRating,
+                  difficultyRating: r.difficultyRating,
+                  wouldTakeAgain: r.wouldTakeAgain,
+                  tags: r.ratingTags ? r.ratingTags.split("--").filter((t: string) => t.trim()) : [],
+                  attendanceMandatory: r.attendanceMandatory,
+                };
+              }) || [],
+            };
+          }
+          
+          return { ...teacher, aggregatedTags: [], reviews: [] };
+        });
+        
+        return { content: [{ type: "json", json: enriched }] };
       },
     );
 
@@ -161,6 +201,7 @@ const handler = createMcpHandler(
         return { content: [{ type: "json", json: filtered }] };
       },
     );
+
   },
   {
     capabilities: {
@@ -168,7 +209,7 @@ const handler = createMcpHandler(
         query_events: { description: "Query events from the BYU events API based on filters." },
         get_category_event_counts: { description: "Get a list of the number of events by event category name and ID." },
         get_event_categories: { description: "Get a list of all event categories with their names and IDs." },
-        get_teacher_ratings: { description: "Get ratings for BYU teachers. Optionally filter by teacher name." },
+        get_teacher_ratings: { description: "Get ratings for BYU teachers with detailed reviews. Optionally filter by teacher name." },
         get_assignments: { description: "Get current assignments for courses. Optionally filter by course code." },
         search_courses: { description: "Search BYU courses by course code, title, or instructor name." }
       },
