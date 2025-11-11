@@ -38,7 +38,7 @@ const DEADLINES_HEIGHT = CALENDAR_HEIGHT - PANEL_HEIGHT; // 100px: Fills remaini
 import { ScrollArea } from '@/app/components/ui/scroll-area';
 
 function UpcomingDeadlinesPanel({ maxItems = 20 }) {
-  const deadlines = getUpcomingDeadlines(maxItems, new Date(2025, 9, 18));
+  const deadlines = getUpcomingDeadlines(maxItems, new Date(2025, 10, 11));
   return (
     <Card
       className="bg-slate-900/95 backdrop-blur-md border-slate-800/50 shadow-2xl p-4 flex flex-col"
@@ -69,7 +69,7 @@ function UpcomingDeadlinesPanel({ maxItems = 20 }) {
               <div className="flex-1">
                 <div className="text-slate-100">{deadline.title}</div>
                 <div className="text-xs text-slate-100">
-                  {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 9, 18))}
+                  {deadline.date && getRelativeTimeDisplay(deadline.date, new Date(2025, 10, 11))}
                 </div>
               </div>
               <div className="text-right">

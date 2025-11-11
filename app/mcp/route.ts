@@ -1,5 +1,5 @@
 import { createMcpHandler } from "mcp-handler";
-import { z } from "zod";
+import { effect, z } from "zod";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -95,7 +95,7 @@ const handler = createMcpHandler(
         
         let filtered = ratingsData;
         
-        if (args.teacher_name) {
+        if (args.teacher_name) {effect
           const searchTerms = args.teacher_name.toLowerCase().split(/\s+/).filter(term => term.length > 0);
           filtered = filtered.filter((t: any) => {
             const fullName = `${t.firstName} ${t.lastName}`.toLowerCase();

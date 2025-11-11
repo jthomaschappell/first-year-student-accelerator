@@ -76,7 +76,7 @@ export function CoursePlanningTab() {
   const [teacherRatings, setTeacherRatings] = useState<TeacherRating[]>([]);
   const [scheduledSections, setScheduledSections] = useState<ScheduledSection[]>([]);
   const [calendarView, setCalendarView] = useState<'daily' | 'weekly'>('weekly');
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 18)); // Oct 18, 2025
+  const [currentDate, setCurrentDate] = useState(new Date(2025, 10, 11)); // Nov 11, 2025
 
   // Load teacher ratings data on component mount
   useEffect(() => {
