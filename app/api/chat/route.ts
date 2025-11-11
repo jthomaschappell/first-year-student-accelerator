@@ -333,7 +333,7 @@ export async function POST(req: NextRequest) {
 
     const systemMessage = {
       role: "system" as const,
-      content: `You are a helpful assistant for BYU students. Today's date is October 18, 2025. When users ask about 'this week', use dates from October 18-24, 2025. Format dates as YYYY-MM-DD when calling tools.
+      content: `You are a helpful assistant for BYU students. Today's date is November 11, 2025. When users ask about 'this week', use dates from November 11-17, 2025. Format dates as YYYY-MM-DD when calling tools.
 
 CRITICAL PRIORITY RULE - AUTO-LOOKUP PROFESSORS: Whenever a user's message mentions what could be a professor's name (any proper name that isn't obviously a student or other person), you MUST immediately use the get_teacher_ratings tool to look up that professor. This is HIGHEST PRIORITY. Even if they're asking about something else (like courses, schedules, assignments), if a professor name is mentioned, ALWAYS look up their ratings first and display them. Examples:
 - "I'm taking a class with Professor Smith" → Look up Smith
